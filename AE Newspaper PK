@@ -1,0 +1,2656 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AE News (aenewspaper) — Digital Portal | اے ای نیوز ڈیجیٹل پورٹل</title>
+  <meta name="description" content="AE News (aenewspaper) — Bilingual English and Urdu digital news portal featuring latest November 20, 2026 national, political, economic, provincial, sports coverage, searchable 6-month archive, and media leadership." />
+  <meta name="keywords" content="aenewspaper, AE NEWS PK, AENEWSPK, aenewspk, AE News, AE News Paper, اے ای نیوز, Pakistan news, Lahore news, digital journalism, Ch Kamran Javed, Muhammad Husnain Rajput" />
+  <!-- Tailwind CSS for responsive layout and utility styling -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter for English & Noto Nastaliq Urdu for Urdu RTL -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              crimson: '#b91c1c',
+              crimsonDark: '#7f1d1d',
+              gold: '#c59b27',
+              paper: '#faf7f2',
+              card: '#ffffff',
+              ink: '#14171f',
+              muted: '#525866'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+            urdu: ['"Noto Nastaliq Urdu"', 'Inter', 'serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    body {
+      background-color: #faf7f2;
+      color: #14171f;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      overflow-x: hidden;
+    }
+
+    html[dir="rtl"] body {
+      font-family: 'Noto Nastaliq Urdu', 'Inter', serif;
+      line-height: 2.05;
+    }
+
+    .urdu-text {
+      font-family: 'Noto Nastaliq Urdu', 'Inter', serif;
+      direction: rtl;
+      text-align: right;
+      line-height: 2.05;
+    }
+
+    .latin-text {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      direction: ltr;
+      text-align: left;
+      line-height: 1.65;
+    }
+
+    .latin-badge {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.2;
+    }
+
+    @keyframes tickerScroll {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+
+    @keyframes tickerScrollRtl {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(50%); }
+    }
+
+    .ticker-track {
+      display: flex;
+      width: max-content;
+      animation: tickerScroll 42s linear infinite;
+    }
+
+    html[dir="rtl"] .ticker-track {
+      animation: tickerScrollRtl 48s linear infinite;
+    }
+
+    .ticker-track:hover {
+      animation-play-state: paused;
+    }
+
+    .masthead-rule {
+      border-top: 3px solid #14171f;
+      border-bottom: 1px solid #d6d0c4;
+    }
+
+    .article-prose p + p {
+      margin-top: 0.75rem;
+    }
+
+    .article-prose-compact p + p {
+      margin-top: 0.55rem;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-brand-crimson selection:text-white">
+
+  <!-- TOP UTILITY & LIVE AUTO-UPDATING EDITION BAR -->
+  <div class="bg-brand-ink text-stone-200 text-xs sm:text-sm border-b border-stone-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex flex-wrap items-center gap-2 sm:gap-3">
+        <button
+          id="liveDateDisplay"
+          type="button"
+          onclick="toggleDateFilter(getTodayIsoDate())"
+          title="Filter news by today's live date • آج کی تاریخ کی خبریں دیکھیں"
+          class="font-medium text-stone-300 hover:text-amber-300 underline decoration-dotted underline-offset-4 transition-colors cursor-pointer text-start">
+          Friday, November 20, 2026
+        </button>
+        <span
+          id="liveClockBadge"
+          class="latin-badge px-2.5 py-0.5 rounded-md bg-emerald-950/90 border border-emerald-500/40 text-emerald-300 font-bold text-xs tracking-wide inline-flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span id="liveClockText">12:53:00 AM PKT</span>
+        </span>
+        <span class="hidden md:inline text-stone-600">|</span>
+        <span id="editionTagline" class="hidden md:inline text-amber-400 font-medium">Lahore • Islamabad • Karachi • لاہور • اسلام آباد • کراچی</span>
+        <button
+          type="button"
+          onclick="openLiveGuideModal()"
+          class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-[11px] transition-colors cursor-pointer">
+          <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
+          <span>How to Go Live • لائیو کیسے کریں</span>
+        </button>
+      </div>
+
+      <!-- Language & Dual-Language Mode Controls -->
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="latin-badge px-2.5 py-1 rounded-md bg-stone-800 border border-amber-500/40 text-amber-300 font-bold text-xs tracking-wide">
+          aenewspaper
+        </span>
+        <div class="inline-flex rounded-lg bg-stone-800 p-0.5 border border-stone-700" role="group" aria-label="Language Edition Toggle">
+          <button
+            id="btnLangEn"
+            type="button"
+            onclick="setLanguageMode('en')"
+            class="latin-badge px-3 py-1 rounded-md text-xs font-bold transition-all bg-brand-crimson text-white shadow-sm cursor-pointer">
+            English
+          </button>
+          <button
+            id="btnLangUr"
+            type="button"
+            onclick="setLanguageMode('ur')"
+            class="px-3 py-1 rounded-md text-xs font-bold transition-all text-stone-300 hover:text-white cursor-pointer">
+            اردو ایڈیشن
+          </button>
+          <button
+            id="btnLangDual"
+            type="button"
+            onclick="setLanguageMode('dual')"
+            class="px-3 py-1 rounded-md text-xs font-bold transition-all text-stone-300 hover:text-white cursor-pointer">
+            EN + اردو
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN MASTHEAD & NAVIGATION -->
+  <header class="bg-white/95 backdrop-blur-xs sticky top-0 z-40 masthead-rule shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5">
+      <div class="flex items-center justify-between gap-4">
+        <!-- AE NEWS UNIQUE EDITORIAL EMBLEM / LOGO -->
+        <a href="#top" class="flex items-center gap-3 group focus:outline-none">
+          <div class="w-12 h-12 sm:w-14 sm:h-14 shrink-0 rounded-xl bg-gradient-to-br from-brand-ink via-stone-900 to-brand-crimsonDark p-1.5 shadow-md border border-amber-400/60 flex items-center justify-center group-hover:scale-[1.03] transition-transform">
+            <svg viewBox="0 0 128 128" class="w-full h-full" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AE News Unique Logo">
+              <defs>
+                <linearGradient id="aeUniqueCrimson" x1="12%" y1="10%" x2="90%" y2="90%">
+                  <stop offset="0%" stop-color="#ef4444" />
+                  <stop offset="55%" stop-color="#b91c1c" />
+                  <stop offset="100%" stop-color="#7f1d1d" />
+                </linearGradient>
+                <linearGradient id="aeUniqueGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#fde68a" />
+                  <stop offset="55%" stop-color="#eab308" />
+                  <stop offset="100%" stop-color="#b45309" />
+                </linearGradient>
+              </defs>
+
+              <polygon
+                points="64,7 110,33 110,95 64,121 18,95 18,33"
+                fill="#14171f"
+                stroke="url(#aeUniqueGold)"
+                stroke-width="4.5"
+                stroke-linejoin="round"
+              />
+              <line x1="28" y1="92" x2="98" y2="34" stroke="url(#aeUniqueGold)" stroke-width="2" stroke-dasharray="4 4" opacity="0.55" />
+              <path d="M90 22 A18 18 0 0 1 103 36" fill="none" stroke="#facc15" stroke-width="2.6" stroke-linecap="round" />
+              <path d="M87 28 A11 11 0 0 1 96 38" fill="none" stroke="#fca5a5" stroke-width="2.4" stroke-linecap="round" />
+              <circle cx="85" cy="40" r="3.6" fill="#facc15" />
+
+              <path
+                d="M27 88 L49 31 L59 31 L76 88 L65 88 L61 74 L44 74 L39 88 Z M47 65 L58 65 L53 45 Z"
+                fill="#ffffff"
+              />
+              <path
+                d="M72 35 L101 35 L101 44 L82 44 L82 56 L98 56 L98 65 L82 65 L82 79 L102 79 L102 88 L72 88 Z"
+                fill="url(#aeUniqueCrimson)"
+                stroke="url(#aeUniqueGold)"
+                stroke-width="1.4"
+              />
+              <rect x="29" y="94" width="70" height="15" rx="4" fill="url(#aeUniqueGold)" />
+              <text
+                x="64"
+                y="104.5"
+                text-anchor="middle"
+                fill="#14171f"
+                font-family="Inter, system-ui, sans-serif"
+                font-size="8.6"
+                font-weight="900"
+                letter-spacing="1.1">
+                AE NEWS
+              </text>
+            </svg>
+          </div>
+
+          <div>
+            <div class="flex flex-wrap items-center gap-2">
+              <span id="brandTitle" class="text-xl sm:text-2xl font-black tracking-tight text-brand-ink">AE NEWS • اے ای نیوز</span>
+              <span id="brandPaperBadge" class="px-2 py-0.5 text-[11px] font-bold rounded bg-red-50 text-brand-crimson border border-red-200">
+                aenewspaper • اے ای نیوز پیپر
+              </span>
+            </div>
+            <p id="brandSubtitle" class="text-xs sm:text-sm text-brand-muted font-medium">
+              Factual Reporting • مستند صحافت • Digital Journalism • ڈیجیٹل جرنلزم
+            </p>
+          </div>
+        </a>
+
+        <!-- DESKTOP NAVIGATION LINKS -->
+        <nav class="hidden lg:flex items-center gap-1 xl:gap-1.5 text-xs xl:text-sm font-bold" aria-label="Primary Sections">
+          <a href="#section-national" data-i18n="navNational" class="px-2.5 py-2 rounded-lg text-brand-ink hover:bg-red-50 hover:text-brand-crimson transition-colors">National • قومی</a>
+          <a href="#section-politics" data-i18n="navPolitics" class="px-2.5 py-2 rounded-lg text-brand-ink hover:bg-red-50 hover:text-brand-crimson transition-colors">Politics • سیاست</a>
+          <a href="#section-economy" data-i18n="navEconomy" class="px-2.5 py-2 rounded-lg text-brand-ink hover:bg-red-50 hover:text-brand-crimson transition-colors">Economy • معیشت</a>
+          <a href="#section-provincial" data-i18n="navProvincial" class="px-2.5 py-2 rounded-lg text-brand-ink hover:bg-red-50 hover:text-brand-crimson transition-colors">Provincial • صوبائی</a>
+          <a href="#section-sports" data-i18n="navSports" class="px-2.5 py-2 rounded-lg text-brand-ink hover:bg-red-50 hover:text-brand-crimson transition-colors">Sports • کھیل</a>
+          <a href="#section-archive" data-i18n="navArchive" class="px-2.5 py-2 rounded-lg text-brand-ink hover:bg-red-50 hover:text-brand-crimson transition-colors">Archive • آرکائیو</a>
+          <a href="#section-leadership" data-i18n="navLeadership" class="px-3 py-2 rounded-lg bg-brand-crimson text-white hover:bg-brand-crimsonDark transition-colors">Leadership • قیادت</a>
+        </nav>
+
+        <!-- MOBILE MENU BUTTON -->
+        <button
+          id="mobileMenuBtn"
+          type="button"
+          onclick="toggleMobileMenu()"
+          class="lg:hidden p-2.5 rounded-lg border border-stone-300 text-brand-ink hover:bg-stone-100 cursor-pointer"
+          aria-label="Toggle navigation menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- MOBILE NAVIGATION DRAWER -->
+      <div id="mobileMenu" class="hidden lg:hidden mt-3 pt-3 border-t border-stone-200 grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs sm:text-sm font-semibold">
+        <a href="#section-national" onclick="closeMobileMenu()" data-i18n="navNational" class="px-3 py-2 rounded-lg bg-stone-50 hover:bg-red-50 hover:text-brand-crimson text-center">National • قومی</a>
+        <a href="#section-politics" onclick="closeMobileMenu()" data-i18n="navPolitics" class="px-3 py-2 rounded-lg bg-stone-50 hover:bg-red-50 hover:text-brand-crimson text-center">Politics • سیاست</a>
+        <a href="#section-economy" onclick="closeMobileMenu()" data-i18n="navEconomy" class="px-3 py-2 rounded-lg bg-stone-50 hover:bg-red-50 hover:text-brand-crimson text-center">Economy • معیشت</a>
+        <a href="#section-provincial" onclick="closeMobileMenu()" data-i18n="navProvincial" class="px-3 py-2 rounded-lg bg-stone-50 hover:bg-red-50 hover:text-brand-crimson text-center">Provincial • صوبائی</a>
+        <a href="#section-sports" onclick="closeMobileMenu()" data-i18n="navSports" class="px-3 py-2 rounded-lg bg-stone-50 hover:bg-red-50 hover:text-brand-crimson text-center">Sports • کھیل</a>
+        <a href="#section-archive" onclick="closeMobileMenu()" data-i18n="navArchive" class="px-3 py-2 rounded-lg bg-stone-50 hover:bg-red-50 hover:text-brand-crimson text-center">Archive • آرکائیو</a>
+        <a href="#section-leadership" onclick="closeMobileMenu()" data-i18n="navLeadership" class="col-span-2 sm:col-span-1 px-3 py-2 rounded-lg bg-brand-crimson text-white text-center">Leadership • قیادت</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- BREAKING NEWS TICKER -->
+  <div id="top" class="bg-brand-crimson text-white overflow-hidden border-b border-brand-crimsonDark">
+    <div class="max-w-7xl mx-auto flex items-center">
+      <div class="shrink-0 bg-brand-crimsonDark px-3 sm:px-4 py-2.5 text-xs sm:text-sm font-extrabold tracking-wide flex items-center gap-2 z-10 shadow-md">
+        <span class="w-2.5 h-2.5 rounded-full bg-amber-300 animate-ping"></span>
+        <span data-i18n="breakingLabel">BREAKING • اہم خبر</span>
+      </div>
+      <div class="overflow-hidden flex-1 py-2.5">
+        <div id="tickerContent" class="ticker-track text-xs sm:text-sm font-medium gap-10 px-4">
+          <!-- Populated dynamically via JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT AREA -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-14">
+
+    <!-- HERO / LEAD STORY + SIDE BRIEFINGS -->
+    <section aria-label="Lead Headlines" class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <!-- Lead Feature Card with Background Picture -->
+      <div id="heroLeadContainer" class="lg:col-span-8 bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden flex flex-col justify-between">
+        <!-- Injected via JS -->
+      </div>
+
+      <!-- Top Briefings & Quick Desk Panel -->
+      <aside class="lg:col-span-4 bg-white rounded-2xl border border-stone-200 shadow-sm p-5 flex flex-col justify-between space-y-5">
+        <div>
+          <div class="flex items-center justify-between border-b-2 border-brand-crimson pb-2.5 mb-4">
+            <h2 data-i18n="deskBriefingsTitle" class="text-base sm:text-lg font-extrabold text-brand-ink">Today's Latest Desk • آج کی اہم خبریں</h2>
+            <button
+              type="button"
+              onclick="toggleDateFilter('2026-11-20')"
+              class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-amber-100 hover:bg-amber-200 text-amber-900 cursor-pointer"
+              data-i18n="verifiedBadge">
+              Nov 20, 2026 • آج
+            </button>
+          </div>
+          <div id="sideBriefingsList" class="divide-y divide-stone-100">
+            <!-- Injected via JS -->
+          </div>
+        </div>
+
+        <!-- Quick Social Channels Box -->
+        <div class="bg-stone-50 rounded-xl p-4 border border-stone-200">
+          <p data-i18n="followChannelsTitle" class="text-xs font-bold uppercase tracking-wider text-brand-muted mb-2.5">
+            AE News Social Channels • سوشل چینلز
+          </p>
+          <div id="headerSocialLinks" class="flex flex-wrap gap-2">
+            <!-- Injected via JS -->
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- FACEBOOK PAGE EMBED & SHOWCASE ON PORTAL -->
+    <section id="section-facebook-banner" class="scroll-mt-24">
+      <div class="rounded-2xl overflow-hidden border border-stone-200 bg-white shadow-sm">
+        <div class="bg-gradient-to-r from-brand-ink via-[#1d2333] to-brand-crimsonDark text-white p-6 sm:p-8 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          <div class="space-y-3 max-w-2xl">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="latin-badge px-2.5 py-1 rounded-md bg-blue-600 text-white text-xs font-extrabold tracking-wide">
+                FACEBOOK OFFICIAL PAGE
+              </span>
+              <span class="latin-badge px-2.5 py-1 rounded-md bg-white/10 border border-white/20 text-amber-300 text-xs font-bold">
+                aenewspaper
+              </span>
+            </div>
+            <h2 id="fbBannerTitle" class="text-2xl sm:text-3xl font-black tracking-tight">
+              AE News Official Facebook Page • اے ای نیوز آفیشل فیس بک پیج
+            </h2>
+            <p id="fbBannerDesc" class="text-xs sm:text-sm text-stone-200 leading-relaxed">
+              Browse live AE News Facebook bulletins, breaking headlines, and video updates directly inside our portal without leaving the page.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-3 shrink-0">
+            <a
+              href="https://www.facebook.com/profile.php?id=61596777447736&sk=about"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="px-5 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-extrabold shadow-md transition-colors inline-flex items-center gap-2">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z" />
+              </svg>
+              <span id="fbBannerOpenBtn">Visit Facebook Page • فیس بک پیج کھولیں</span>
+            </a>
+            <button
+              type="button"
+              onclick="copyFacebookPageUrl()"
+              class="px-4 py-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/25 text-white text-xs sm:text-sm font-bold transition-colors cursor-pointer">
+              <span id="fbCopyUrlBtn">Share Page • پیج شیئر کریں</span>
+            </button>
+            <button
+              type="button"
+              onclick="downloadFacebookCoverPng()"
+              class="px-4 py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-brand-ink text-xs sm:text-sm font-extrabold transition-colors cursor-pointer">
+              Download Cover PNG • کور ڈاؤن لوڈ
+            </button>
+          </div>
+        </div>
+
+        <p id="fbCopyStatus" class="hidden px-6 sm:px-8 pt-4 text-xs sm:text-sm font-bold text-emerald-700"></p>
+
+        <!-- FACEBOOK PAGE COVER PREVIEW & EMBEDDED TIMELINE -->
+        <div class="p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div class="lg:col-span-7 space-y-3">
+            <h3 class="text-sm font-extrabold text-brand-ink">
+              Facebook Page Cover Preview • فیس بک پیج کور تصویر
+            </h3>
+            <figure class="rounded-2xl overflow-hidden border border-stone-200 bg-brand-ink shadow-xs">
+              <img
+                src="https://placehold.co/1640x624/14171f/facc15?text=AE+NEWS+%7C+aenewspaper+%7C+OFFICIAL+FACEBOOK+PAGE"
+                alt="AE News Facebook Cover Preview"
+                onerror="this.onerror=null;this.src='https://placehold.co/1200x630/14171f/facc15?text=AE+NEWS+FACEBOOK+COVER';"
+                class="w-full h-48 sm:h-60 object-cover"
+              />
+              <figcaption class="px-4 py-2.5 bg-stone-50 border-t border-stone-200 text-xs text-brand-muted flex flex-wrap items-center justify-between gap-2">
+                <span>1640×624 Facebook Cover Ready • فیس بک پیج کور ڈیزائن</span>
+                <span class="font-bold text-brand-crimson">aenewspaper</span>
+              </figcaption>
+            </figure>
+          </div>
+
+          <div class="lg:col-span-5 space-y-3">
+            <h3 class="text-sm font-extrabold text-brand-ink">
+              Live Facebook Page Feed • لائیو فیس بک پیج
+            </h3>
+            <div class="rounded-2xl overflow-hidden border border-stone-200 bg-stone-50 shadow-xs">
+              <iframe
+                title="AE News Facebook Page Plugin"
+                src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D61596777447736%26sk%3Dabout&tabs=timeline&width=500&height=300&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true"
+                class="w-full h-60 border-0"
+                loading="lazy"
+                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+              </iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 1. NATIONAL NEWS SECTION WITH PAGE BANNER PICTURE -->
+    <section id="section-national" class="scroll-mt-24 space-y-5">
+      <div class="relative rounded-2xl overflow-hidden border border-stone-200 bg-brand-ink text-white shadow-xs">
+        <img
+          src="https://placehold.co/1280x260/14171f/facc15?text=AE+NEWS+%7C+NATIONAL+NEWS+PAGE+%7C+%D9%82%D9%88%D9%85%DB%8C+%D8%AE%D8%A8%D8%B1%DB%8C%DA%BA"
+          alt="National News Section Banner"
+          onerror="this.onerror=null;this.src='https://placehold.co/1200x630/14171f/facc15?text=NATIONAL+NEWS';"
+          class="w-full h-36 sm:h-44 object-cover opacity-45"
+        />
+        <div class="relative z-10 -mt-36 sm:-mt-44 h-36 sm:h-44 bg-gradient-to-r from-brand-ink/90 via-brand-ink/75 to-brand-crimsonDark/80 p-5 sm:p-7 flex flex-col justify-between border-b-4 border-brand-crimson">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h2 data-i18n="secNational" class="text-xl sm:text-3xl font-black text-white">National News</h2>
+              <p data-i18n="secNationalSub" class="text-xs sm:text-sm text-stone-200 mt-1">Federal policy, offshore exploration &amp; civic affairs</p>
+            </div>
+            <span class="px-3 py-1 rounded-full bg-white/15 border border-white/25 text-amber-300 text-xs font-extrabold">
+              Page 01 • صفحہ 01
+            </span>
+          </div>
+        </div>
+      </div>
+      <div id="grid-national" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+    </section>
+
+    <!-- 2. POLITICS SECTION WITH PAGE BANNER PICTURE -->
+    <section id="section-politics" class="scroll-mt-24 space-y-5">
+      <div class="relative rounded-2xl overflow-hidden border border-stone-200 bg-amber-950 text-white shadow-xs">
+        <img
+          src="https://placehold.co/1280x260/451a03/fde68a?text=AE+NEWS+%7C+POLITICS+PAGE+%7C+%D8%B3%DB%8C%D8%A7%D8%B3%D8%AA+%D9%88+%D9%BE%D8%A7%D8%B1%D9%84%DB%8C%D9%85%D8%A7%D9%86"
+          alt="Politics Section Banner"
+          onerror="this.onerror=null;this.src='https://placehold.co/1200x630/451a03/fde68a?text=POLITICS+NEWS';"
+          class="w-full h-36 sm:h-44 object-cover opacity-45"
+        />
+        <div class="relative z-10 -mt-36 sm:-mt-44 h-36 sm:h-44 bg-gradient-to-r from-amber-950/90 via-stone-900/75 to-amber-900/80 p-5 sm:p-7 flex flex-col justify-between border-b-4 border-brand-gold">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h2 data-i18n="secPolitics" class="text-xl sm:text-3xl font-black text-white">Politics</h2>
+              <p data-i18n="secPoliticsSub" class="text-xs sm:text-sm text-amber-100 mt-1">Dialogue, parliament &amp; governance</p>
+            </div>
+            <span class="px-3 py-1 rounded-full bg-amber-400/20 border border-amber-300/40 text-amber-200 text-xs font-extrabold">
+              Page 02 • صفحہ 02
+            </span>
+          </div>
+        </div>
+      </div>
+      <div id="grid-politics" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+    </section>
+
+    <!-- 3. ECONOMY & TRADE SECTION WITH PAGE BANNER PICTURE -->
+    <section id="section-economy" class="scroll-mt-24 space-y-5">
+      <div class="relative rounded-2xl overflow-hidden border border-stone-200 bg-emerald-950 text-white shadow-xs">
+        <img
+          src="https://placehold.co/1280x260/064e3b/a7f3d0?text=AE+NEWS+%7C+ECONOMY+%26+TRADE+PAGE+%7C+%D9%85%D8%B9%DB%8C%D8%B4%D8%AA+%D9%88+%D8%AA%D8%AC%D8%A7%D8%B1%D8%AA"
+          alt="Economy and Trade Section Banner"
+          onerror="this.onerror=null;this.src='https://placehold.co/1200x630/064e3b/a7f3d0?text=ECONOMY+%26+TRADE';"
+          class="w-full h-36 sm:h-44 object-cover opacity-45"
+        />
+        <div class="relative z-10 -mt-36 sm:-mt-44 h-36 sm:h-44 bg-gradient-to-r from-emerald-950/90 via-stone-900/75 to-emerald-900/80 p-5 sm:p-7 flex flex-col justify-between border-b-4 border-emerald-500">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h2 data-i18n="secEconomy" class="text-xl sm:text-3xl font-black text-white">Economy &amp; Trade</h2>
+              <p data-i18n="secEconomySub" class="text-xs sm:text-sm text-emerald-100 mt-1">Fuel prices, PSX markets &amp; banking</p>
+            </div>
+            <span class="px-3 py-1 rounded-full bg-emerald-400/20 border border-emerald-300/40 text-emerald-200 text-xs font-extrabold">
+              Page 03 • صفحہ 03
+            </span>
+          </div>
+        </div>
+      </div>
+      <div id="grid-economy" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+    </section>
+
+    <!-- 4. PROVINCIAL UPDATES SECTION WITH PAGE BANNER PICTURE -->
+    <section id="section-provincial" class="scroll-mt-24 space-y-5">
+      <div class="relative rounded-2xl overflow-hidden border border-stone-200 bg-blue-950 text-white shadow-xs">
+        <img
+          src="https://placehold.co/1280x260/1e3a8a/bfdbfe?text=AE+NEWS+%7C+PROVINCIAL+PAGE+%7C+%D8%B5%D9%88%D8%A8%D8%A7%D8%A6%DB%8C+%D8%AE%D8%A8%D8%B1%DB%8C%DA%BA+%26+%D9%84%D8%A7%DB%81%D9%88%D8%B1"
+          alt="Provincial Updates Section Banner"
+          onerror="this.onerror=null;this.src='https://placehold.co/1200x630/1e3a8a/bfdbfe?text=PROVINCIAL+NEWS';"
+          class="w-full h-36 sm:h-44 object-cover opacity-45"
+        />
+        <div class="relative z-10 -mt-36 sm:-mt-44 h-36 sm:h-44 bg-gradient-to-r from-blue-950/90 via-stone-900/75 to-blue-900/80 p-5 sm:p-7 flex flex-col justify-between border-b-4 border-blue-500">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h2 data-i18n="secProvincial" class="text-xl sm:text-3xl font-black text-white">Provincial Updates</h2>
+              <p data-i18n="secProvincialSub" class="text-xs sm:text-sm text-blue-100 mt-1">Lahore smog drive, Punjab solar &amp; regional dispatches</p>
+            </div>
+            <span class="px-3 py-1 rounded-full bg-blue-400/20 border border-blue-300/40 text-blue-200 text-xs font-extrabold">
+              Page 04 • صفحہ 04
+            </span>
+          </div>
+        </div>
+      </div>
+      <div id="grid-provincial" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+    </section>
+
+    <!-- 5. SPORTS SECTION WITH PAGE BANNER PICTURE -->
+    <section id="section-sports" class="scroll-mt-24 space-y-5">
+      <div class="relative rounded-2xl overflow-hidden border border-stone-200 bg-purple-950 text-white shadow-xs">
+        <img
+          src="https://placehold.co/1280x260/581c87/f3e8ff?text=AE+NEWS+%7C+SPORTS+PAGE+%7C+%DA%A9%DA%BE%DB%8C%D9%84+%D9%88+%DA%A9%D8%B1%DA%A9%D9%B9"
+          alt="Sports Section Banner"
+          onerror="this.onerror=null;this.src='https://placehold.co/1200x630/581c87/f3e8ff?text=SPORTS+NEWS';"
+          class="w-full h-36 sm:h-44 object-cover opacity-45"
+        />
+        <div class="relative z-10 -mt-36 sm:-mt-44 h-36 sm:h-44 bg-gradient-to-r from-purple-950/90 via-stone-900/75 to-purple-900/80 p-5 sm:p-7 flex flex-col justify-between border-b-4 border-purple-500">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h2 data-i18n="secSports" class="text-xl sm:text-3xl font-black text-white">Sports</h2>
+              <p data-i18n="secSportsSub" class="text-xs sm:text-sm text-purple-100 mt-1">Rawalpindi Test, athlete fund &amp; tournaments</p>
+            </div>
+            <span class="px-3 py-1 rounded-full bg-purple-400/20 border border-purple-300/40 text-purple-200 text-xs font-extrabold">
+              Page 05 • صفحہ 05
+            </span>
+          </div>
+        </div>
+      </div>
+      <div id="grid-sports" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+    </section>
+
+    <!-- 6. SEARCHABLE 6-MONTH NEWS ARCHIVE (JUNE–NOVEMBER 2026) -->
+    <section id="section-archive" class="scroll-mt-24 bg-white rounded-2xl border border-stone-200 shadow-sm p-6 sm:p-8 space-y-6">
+      <div class="relative rounded-2xl overflow-hidden border border-stone-200 bg-stone-900 text-white shadow-xs">
+        <img
+          src="https://placehold.co/1280x220/14171f/fde68a?text=AE+NEWS+%7C+6-MONTH+ARCHIVE+%7C+%DA%86%DA%BE+%D9%85%D8%A7%DB%81%DB%81+%D8%A2%D8%B1%DA%A9%D8%A7%D8%A6%DB%8C%D9%88"
+          alt="6-Month Archive Banner"
+          onerror="this.onerror=null;this.src='https://placehold.co/1200x630/14171f/fde68a?text=NEWS+ARCHIVE';"
+          class="w-full h-32 sm:h-40 object-cover opacity-40"
+        />
+        <div class="relative z-10 -mt-32 sm:-mt-40 h-32 sm:h-40 bg-gradient-to-r from-brand-ink/90 via-stone-900/75 to-brand-crimsonDark/80 p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b-4 border-brand-gold">
+          <div>
+            <p data-i18n="archiveEyebrow" class="text-xs font-extrabold uppercase tracking-wider text-amber-300 mb-1">
+              6-Month Archive (Jun–Nov 2026)
+            </p>
+            <h2 data-i18n="secArchive" class="text-xl sm:text-2xl font-black text-white">
+              Searchable 6-Month News Archive
+            </h2>
+            <p data-i18n="secArchiveSub" class="text-xs sm:text-sm text-stone-200 mt-1">
+              Search verified AE News reports from June 2026 to November 20, 2026 by keyword, month, date, or category.
+            </p>
+          </div>
+          <span id="archiveCountBadge" class="self-start sm:self-center px-3 py-1.5 rounded-full bg-white/15 border border-white/25 text-amber-200 text-xs font-bold">
+            Showing all reports
+          </span>
+        </div>
+      </div>
+
+      <!-- Search, Month, Category & Date Filter Controls -->
+      <div class="bg-stone-50 rounded-xl p-4 border border-stone-200 space-y-3">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+          <div class="md:col-span-5">
+            <input
+              id="archiveSearchInput"
+              type="search"
+              oninput="renderArchive()"
+              placeholder="Search headlines, cities, topics... • خبریں تلاش کریں..."
+              class="w-full px-3.5 py-2.5 rounded-lg bg-white border border-stone-300 text-xs sm:text-sm text-brand-ink focus:outline-none focus:border-brand-crimson"
+            />
+          </div>
+          <div class="md:col-span-3">
+            <select
+              id="archiveMonthSelect"
+              onchange="renderArchive()"
+              class="w-full px-3.5 py-2.5 rounded-lg bg-white border border-stone-300 text-xs sm:text-sm font-semibold text-brand-ink focus:outline-none focus:border-brand-crimson">
+            </select>
+          </div>
+          <div class="md:col-span-3">
+            <select
+              id="archiveCategorySelect"
+              onchange="renderArchive()"
+              class="w-full px-3.5 py-2.5 rounded-lg bg-white border border-stone-300 text-xs sm:text-sm font-semibold text-brand-ink focus:outline-none focus:border-brand-crimson">
+            </select>
+          </div>
+          <div class="md:col-span-1">
+            <button
+              type="button"
+              onclick="resetArchiveFilters()"
+              class="w-full h-full px-3 py-2.5 rounded-lg bg-brand-ink hover:bg-brand-crimson text-white text-xs font-extrabold transition-colors cursor-pointer">
+              <span data-i18n="resetBtn">Reset</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-stone-200/80">
+          <div class="flex flex-wrap items-center gap-2">
+            <span data-i18n="dateFilterLabel" class="text-xs font-bold text-brand-ink">Date Filter:</span>
+            <input
+              id="archiveDatePicker"
+              type="date"
+              min="2026-06-01"
+              max="2026-11-20"
+              onchange="setSelectedDate(this.value)"
+              class="px-2.5 py-1.5 rounded-lg bg-white border border-stone-300 text-xs font-semibold text-brand-ink focus:outline-none focus:border-brand-crimson"
+            />
+            <button
+              id="autoSyncDateBtn"
+              type="button"
+              onclick="toggleAutoDateSync()"
+              class="px-3 py-1.5 rounded-lg bg-stone-200 hover:bg-stone-300 text-brand-ink text-xs font-extrabold transition-colors cursor-pointer">
+              Auto-Sync Today: OFF
+            </button>
+            <button
+              type="button"
+              onclick="clearSelectedDate()"
+              data-i18n="clearDateBtn"
+              class="px-2.5 py-1.5 rounded-lg bg-white hover:bg-stone-100 border border-stone-300 text-xs font-bold text-stone-700 cursor-pointer">
+              Clear Date
+            </button>
+            <span id="activeDateIndicator" class="text-xs font-bold px-2.5 py-1 rounded-full bg-stone-200 text-stone-700">
+              Showing All Dates
+            </span>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-1.5 pt-1 border-t border-stone-200/80">
+          <span data-i18n="quickDatesLabel" class="text-[11px] font-bold text-brand-muted me-1">
+            Quick Dates • فوری تاریخیں:
+          </span>
+          <div id="quickDateChips" class="flex flex-wrap gap-1.5">
+            <!-- Populated dynamically via JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Archive Results Grid -->
+      <div id="archiveResultsGrid" class="grid grid-cols-1 lg:grid-cols-2 gap-6"></div>
+    </section>
+
+    <!-- 7. MEDIA LEADERSHIP SECTION (FOUNDER & CEO IN BOTH ENGLISH & URDU) -->
+    <section id="section-leadership" class="scroll-mt-24 bg-gradient-to-br from-stone-100 via-[#f7f2e7] to-stone-100 rounded-2xl border border-stone-300/80 shadow-sm p-6 sm:p-10">
+      <div class="max-w-4xl mb-8">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-100 text-brand-crimson text-xs font-extrabold uppercase tracking-wider mb-3">
+          <span class="w-2 h-2 rounded-full bg-brand-crimson"></span>
+          <span data-i18n="leadershipEyebrow">aenewspaper • Media &amp; Editorial Leadership • صحافتی و میڈیا قیادت</span>
+        </div>
+        <h2 data-i18n="leadershipTitle" class="text-2xl sm:text-4xl font-black text-brand-ink mb-2">
+          Media Leadership • ہماری میڈیا قیادت
+        </h2>
+        <p data-i18n="leadershipSubtitle" class="text-sm sm:text-base text-brand-muted">
+          Guiding AE News with factual reporting, disciplined digital media operations, and a collaborative newsroom culture.
+        </p>
+      </div>
+
+      <div id="leadershipCardsContainer" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Populated dynamically via JS -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER WITH GULBERG LAHORE MAP & COMPLETE SOCIAL CHANNELS -->
+  <footer class="bg-brand-ink text-stone-300 border-t-4 border-brand-crimson mt-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 pb-8 border-b border-stone-800">
+        <!-- Brand Column -->
+        <div class="md:col-span-5 space-y-3">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-stone-950 to-brand-crimsonDark p-1 flex items-center justify-center border border-amber-400/60 shrink-0">
+              <svg viewBox="0 0 128 128" class="w-full h-full" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <polygon
+                  points="64,7 110,33 110,95 64,121 18,95 18,33"
+                  fill="#14171f"
+                  stroke="#facc15"
+                  stroke-width="4.5"
+                  stroke-linejoin="round"
+                />
+                <circle cx="88" cy="36" r="4" fill="#facc15" />
+                <path
+                  d="M27 88 L49 31 L59 31 L76 88 L65 88 L61 74 L44 74 L39 88 Z M47 65 L58 65 L53 45 Z"
+                  fill="#ffffff"
+                />
+                <path
+                  d="M72 35 L101 35 L101 44 L82 44 L82 56 L98 56 L98 65 L82 65 L82 79 L102 79 L102 88 L72 88 Z"
+                  fill="#dc2626"
+                  stroke="#facc15"
+                  stroke-width="1.3"
+                />
+                <rect x="29" y="94" width="70" height="15" rx="4" fill="#facc15" />
+                <text
+                  x="64"
+                  y="104.5"
+                  text-anchor="middle"
+                  fill="#14171f"
+                  font-family="Inter, system-ui, sans-serif"
+                  font-size="8.6"
+                  font-weight="900"
+                  letter-spacing="1.1">
+                  AE NEWS
+                </text>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-base sm:text-lg font-black text-white" data-i18n="footerBrandName">aenewspaper • اے ای نیوز پیپر</h3>
+              <p class="text-xs text-stone-400" data-i18n="footerTagline">Truthful Journalism • سچی صحافت • Digital Newsroom • ڈیجیٹل نیوز روم</p>
+            </div>
+          </div>
+          <p class="text-xs sm:text-sm text-stone-400 leading-relaxed" data-i18n="footerDesc">
+            AE News delivers bilingual national, political, economic, provincial, and sports coverage alongside a searchable six-month archive in English and Urdu.
+          </p>
+        </div>
+
+        <!-- Quick Sections & Gulberg Office Map -->
+        <div class="md:col-span-3 space-y-2 text-sm">
+          <h4 class="text-xs font-extrabold uppercase tracking-wider text-amber-400 mb-3" data-i18n="footerSectionsHeading">Sections • سیکشنز</h4>
+          <ul class="space-y-1.5 text-stone-300 text-xs sm:text-sm">
+            <li><a href="#section-national" data-i18n="navNational" class="hover:text-white transition-colors">National • قومی</a></li>
+            <li><a href="#section-politics" data-i18n="navPolitics" class="hover:text-white transition-colors">Politics • سیاست</a></li>
+            <li><a href="#section-economy" data-i18n="navEconomy" class="hover:text-white transition-colors">Economy • معیشت</a></li>
+            <li><a href="#section-provincial" data-i18n="navProvincial" class="hover:text-white transition-colors">Provincial • صوبائی</a></li>
+            <li><a href="#section-sports" data-i18n="navSports" class="hover:text-white transition-colors">Sports • کھیل</a></li>
+            <li><a href="#section-archive" data-i18n="navArchive" class="hover:text-white transition-colors">Archive • آرکائیو</a></li>
+          </ul>
+          <div id="footerOfficeAddressBox" class="mt-4 pt-3 border-t border-stone-800 space-y-1">
+            <!-- Populated dynamically via JS -->
+          </div>
+        </div>
+
+        <!-- Social Channels Column -->
+        <div class="md:col-span-4 space-y-3">
+          <h4 class="text-xs font-extrabold uppercase tracking-wider text-amber-400" data-i18n="footerSocialHeading">Official Social Channels • سوشل چینلز</h4>
+          <p class="text-xs text-stone-400" data-i18n="footerSocialSub">Follow AE News across all official social media platforms:</p>
+          <div id="footerSocialGrid" class="grid grid-cols-2 sm:grid-cols-3 gap-2 pt-1"></div>
+        </div>
+      </div>
+
+      <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-stone-400">
+        <p data-i18n="copyrightText">© 2026 AE News • اے ای نیوز پیپر. All rights reserved • جملہ حقوق محفوظ ہیں۔</p>
+        <p data-i18n="leadershipCredit">Founder: Ch Kamran Javed (چوہدری کامران جاوید) • CEO: Muhammad Husnain Rajput (محمد حسنین راجپوت)</p>
+        <span class="px-2.5 py-0.5 rounded-full bg-stone-800 border border-stone-700 text-amber-300 font-bold">
+          aenewspaper • Final Build
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ARTICLE READER MODAL (NO alert() OR confirm()) -->
+  <div id="articleModal" class="fixed inset-0 z-50 hidden bg-black/65 backdrop-blur-xs flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="modalHeadline">
+    <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[88vh] overflow-y-auto shadow-2xl border border-stone-200">
+      <div class="sticky top-0 bg-white border-b border-stone-200 px-6 py-4 flex items-center justify-between gap-4 z-10">
+        <span id="modalCategoryBadge" class="text-xs font-extrabold uppercase tracking-wider px-2.5 py-1 rounded-full bg-red-50 text-brand-crimson">
+          Category
+        </span>
+        <button
+          type="button"
+          onclick="closeArticleModal()"
+          class="px-3 py-1.5 rounded-lg bg-stone-100 hover:bg-stone-200 text-xs font-bold text-brand-ink cursor-pointer">
+          Close • بند کریں ✕
+        </button>
+      </div>
+      <div id="modalContentArea" class="p-6 sm:p-8 space-y-4"></div>
+    </div>
+  </div>
+
+  <!-- HOW TO GO LIVE GUIDE MODAL -->
+  <div id="liveGuideModal" class="fixed inset-0 z-50 hidden bg-black/65 backdrop-blur-xs flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="liveGuideTitle">
+    <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[88vh] overflow-y-auto shadow-2xl border border-stone-200">
+      <div class="sticky top-0 bg-brand-ink text-white px-6 py-4 flex items-center justify-between gap-4 z-10">
+        <div>
+          <p class="text-[11px] font-extrabold uppercase tracking-wider text-amber-300">AE NEWS • aenewspaper</p>
+          <h2 id="liveGuideTitle" class="text-base sm:text-lg font-black">How to Make This Website Live • ویب سائٹ لائیو کرنے کا طریقہ</h2>
+        </div>
+        <button
+          type="button"
+          onclick="closeLiveGuideModal()"
+          class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-bold text-white cursor-pointer">
+          Close • بند کریں ✕
+        </button>
+      </div>
+      <div class="p-6 space-y-4 text-xs sm:text-sm text-stone-700">
+        <div class="p-4 rounded-xl bg-amber-50 border border-amber-200 space-y-1">
+          <p class="font-extrabold text-brand-ink">Step 1: Save File as index.html • فائل کو index.html کے نام سے محفوظ کریں</p>
+          <p>Download or copy <code class="px-1.5 py-0.5 bg-white rounded border">ae-news-portal.html</code> and save it as <code class="px-1.5 py-0.5 bg-white rounded border">index.html</code> in a folder.</p>
+          <p class="urdu-text text-stone-800">اس فائل کو ڈاؤن لوڈ یا کاپی کریں اور ایک فولڈر میں <code dir="ltr">index.html</code> کے نام سے محفوظ کر لیں۔</p>
+        </div>
+
+        <div class="p-4 rounded-xl bg-emerald-50 border border-emerald-200 space-y-1">
+          <p class="font-extrabold text-brand-ink">Step 2: Free Instant Hosting (Netlify Drop / Vercel / GitHub Pages)</p>
+          <p>Go to <strong>app.netlify.com/drop</strong> and drag-and-drop your folder containing <code class="px-1.5 py-0.5 bg-white rounded border">index.html</code> — you get a live URL in seconds.</p>
+          <p class="urdu-text text-stone-800"><strong>Netlify Drop</strong>، <strong>Vercel</strong> یا <strong>GitHub Pages</strong> پر فولڈر اپ لوڈ کریں، چند سیکنڈز میں لائیو لنک مل جائے گا۔</p>
+        </div>
+
+        <div class="p-4 rounded-xl bg-blue-50 border border-blue-200 space-y-1">
+          <p class="font-extrabold text-brand-ink">Step 3: Custom Domain &amp; cPanel / Hosting Upload</p>
+          <p>If you already bought a domain (like <code class="px-1.5 py-0.5 bg-white rounded border">aenewspaper.com</code>), log in to your hosting <strong>File Manager → public_html</strong> and upload <code class="px-1.5 py-0.5 bg-white rounded border">index.html</code>.</p>
+          <p class="urdu-text text-stone-800">اگر آپ کے پاس ڈومین اور ہوسٹنگ ہے تو کنٹرول پینل کے <strong>public_html</strong> فولڈر میں <code dir="ltr">index.html</code> اپ لوڈ کر دیں۔</p>
+        </div>
+
+        <div class="p-4 rounded-xl bg-stone-100 border border-stone-300 space-y-1">
+          <p class="font-extrabold text-brand-ink">Step 4: Live Verification • لائیو چیک لسٹ</p>
+          <p>Open your live URL on mobile &amp; desktop and check breaking news ticker, PKT live clock, Facebook feed, and Gulberg Lahore map.</p>
+          <p class="urdu-text text-stone-800">لائیو لنک کو موبائل اور کمپیوٹر پر کھول کر ٹکر، لائیو گھڑی، فیس بک فیڈ اور گلبرگ آفس کا نقشہ چیک کریں۔</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- APPLICATION DATA & BILINGUAL RENDERING LOGIC -->
+  <script>
+    let langMode = 'en';
+    let selectedDate = '';
+    let autoSyncToday = false;
+    let lastObservedTodayIso = '';
+    const compactArticleIds = new Set();
+
+    const UI_TEXT = {
+      en: {
+        editionTagline: 'Lahore • Islamabad • Karachi',
+        brandTitle: 'AE NEWS',
+        brandPaperBadge: 'aenewspaper',
+        brandSubtitle: 'Factual Reporting • Digital Journalism',
+        navNational: 'National',
+        navPolitics: 'Politics',
+        navEconomy: 'Economy',
+        navProvincial: 'Provincial',
+        navSports: 'Sports',
+        navArchive: 'Archive',
+        navLeadership: 'Leadership',
+        breakingLabel: 'BREAKING',
+        deskBriefingsTitle: "Today's Latest Desk",
+        verifiedBadge: 'Nov 20, 2026',
+        followChannelsTitle: 'AE News Social Channels',
+        secNational: 'National News',
+        secNationalSub: 'Federal policy, offshore exploration & civic affairs',
+        secPolitics: 'Politics',
+        secPoliticsSub: 'Dialogue, parliament & governance',
+        secEconomy: 'Economy & Trade',
+        secEconomySub: 'Fuel prices, PSX markets & banking',
+        secProvincial: 'Provincial Updates',
+        secProvincialSub: 'Lahore smog drive, Punjab solar & regional dispatches',
+        secSports: 'Sports',
+        secSportsSub: 'Rawalpindi Test, athlete fund & tournaments',
+        archiveEyebrow: '6-Month Archive (Jun–Nov 2026)',
+        secArchive: 'Searchable 6-Month News Archive',
+        secArchiveSub: 'Search verified AE News reports from June 2026 to November 20, 2026 by keyword, month, date, or category.',
+        resetBtn: 'Reset',
+        leadershipEyebrow: 'aenewspaper • Media & Editorial Leadership',
+        leadershipTitle: 'Media Leadership',
+        leadershipSubtitle: 'Guiding AE News with factual reporting, disciplined digital media operations, and a collaborative newsroom culture.',
+        footerBrandName: 'aenewspaper',
+        footerTagline: 'Truthful Journalism • Digital Newsroom',
+        footerDesc: 'AE News delivers bilingual national, political, economic, provincial, and sports coverage alongside a searchable six-month archive in English and Urdu.',
+        footerSectionsHeading: 'Sections',
+        footerSocialHeading: 'Official Social Channels',
+        footerSocialSub: 'Follow AE News across all official social media platforms:',
+        copyrightText: '© 2026 AE News (aenewspaper). All rights reserved.',
+        leadershipCredit: 'Founder: Ch Kamran Javed • CEO: Muhammad Husnain Rajput',
+        readFullBtn: 'Read Full Report',
+        compactBtnLabel: 'Compact View',
+        fullTextBtnLabel: 'Full Text View',
+        leadStoryBadge: 'NATIONAL LEAD • NOV 20, 2026',
+        noResultsTitle: 'No matching reports found',
+        noResultsBody: 'Try adjusting your search keywords, month, date filter, or category selection.',
+        fbBannerTitle: 'AE News Official Facebook Page',
+        fbBannerDesc: 'Browse live AE News Facebook bulletins, breaking headlines, and video updates directly inside our portal without leaving the page.',
+        fbOpenBtn: 'Visit Facebook Page',
+        fbCopyBtn: 'Share Page',
+        fbCopiedMsg: 'AE News Facebook page link copied to clipboard.',
+        officeHeading: 'Gulberg Office',
+        officeAddress: 'Office No. 423, Floor 7, Mega Tower (Near KFC), Main Gulberg, Lahore.',
+        mapOpenBtn: 'Open in Google Maps',
+        mapDirectionsBtn: 'Get Directions',
+        dateFilterLabel: 'Date Filter:',
+        clearDateBtn: 'Clear Date',
+        quickDatesLabel: 'Quick Dates:',
+        allDatesBadge: 'Showing All Dates',
+        activeDateBadgePrefix: 'Filtered by Date:',
+        autoSyncOnLabel: 'Auto-Sync Today: ON (Live)',
+        autoSyncOffLabel: 'Auto-Sync Today: OFF',
+        noDateMatch: 'No news reports found for the selected date.',
+        clickDateHint: 'Click date to filter'
+      },
+      ur: {
+        editionTagline: 'لاہور • اسلام آباد • کراچی',
+        brandTitle: 'اے ای نیوز',
+        brandPaperBadge: 'اے ای نیوز پیپر',
+        brandSubtitle: 'مستند صحافت • ڈیجیٹل جرنلزم',
+        navNational: 'قومی',
+        navPolitics: 'سیاست',
+        navEconomy: 'معیشت',
+        navProvincial: 'صوبائی',
+        navSports: 'کھیل',
+        navArchive: 'آرکائیو',
+        navLeadership: 'قیادت',
+        breakingLabel: 'اہم خبر',
+        deskBriefingsTitle: 'آج کی تازہ ترین خبریں',
+        verifiedBadge: '20 نومبر 2026',
+        followChannelsTitle: 'اے ای نیوز سوشل چینلز',
+        secNational: 'قومی خبریں',
+        secNationalSub: 'وفاقی پالیسی، سمندری وسائل اور عوامی امور',
+        secPolitics: 'سیاست',
+        secPoliticsSub: 'سیاسی مفاہمت، پارلیمان اور طرزِ حکمرانی',
+        secEconomy: 'معیشت و تجارت',
+        secEconomySub: 'پٹرولیم قیمتیں، اسٹاک مارکیٹ اور بینکنگ',
+        secProvincial: 'صوبائی خبریں',
+        secProvincialSub: 'لاہور اسموگ مہم، پنجاب سولر اسکیم اور علاقائی رپورٹس',
+        secSports: 'کھیل',
+        secSportsSub: 'راولپنڈی ٹیسٹ، ایتھلیٹ فنڈ اور ٹورنامنٹس',
+        archiveEyebrow: 'چھ ماہہ ریکارڈ (جون تا نومبر 2026)',
+        secArchive: 'سرچ ایبل 6 ماہہ نیوز آرکائیو',
+        secArchiveSub: 'جون 2026 سے 20 نومبر 2026 تک اے ای نیوز کی رپورٹس تلاش کریں۔',
+        resetBtn: 'ری سیٹ',
+        leadershipEyebrow: 'اے ای نیوز پیپر • صحافتی و میڈیا قیادت',
+        leadershipTitle: 'ہماری میڈیا قیادت',
+        leadershipSubtitle: 'مستند رپورٹنگ، منظم ڈیجیٹل میڈیا آپریشنز اور باہمی تعاون پر مبنی نیوز روم کلچر کے ساتھ اے ای نیوز کی رہنمائی۔',
+        footerBrandName: 'اے ای نیوز پیپر',
+        footerTagline: 'سچی صحافت • ڈیجیٹل نیوز روم',
+        footerDesc: 'اے ای نیوز انگریزی اور اردو دونوں زبانوں میں قومی، سیاسی، معاشی، صوبائی اور کھیلوں کی مستند خبریں اور چھ ماہہ آرکائیو پیش کرتا ہے۔',
+        footerSectionsHeading: 'سیکشنز',
+        footerSocialHeading: 'آفیشل سوشل چینلز',
+        footerSocialSub: 'تمام آفیشل سوشل میڈیا پلیٹ فارمز پر اے ای نیوز کو فالو کریں:',
+        copyrightText: '© 2026 اے ای نیوز پیپر (AE News)۔ جملہ حقوق محفوظ ہیں۔',
+        leadershipCredit: 'بانی: چوہدری کامران جاوید • چیف ایگزیکٹو آفیسر: محمد حسنین راجپوت',
+        readFullBtn: 'مکمل رپورٹ پڑھیں',
+        compactBtnLabel: 'مختصر متن',
+        fullTextBtnLabel: 'مکمل متن',
+        leadStoryBadge: 'قومی شہ سرخی • 20 نومبر 2026',
+        noResultsTitle: 'کوئی متعلقہ خبر نہیں ملی',
+        noResultsBody: 'براہ کرم تلاش کے الفاظ، مہینہ، تاریخ یا زمرہ تبدیل کر کے دوبارہ کوشش کریں۔',
+        fbBannerTitle: 'اے ای نیوز آفیشل فیس بک پیج',
+        fbBannerDesc: 'ویب سائٹ سے باہر جائے بغیر براہِ راست اے ای نیوز کے فیس بک بلیٹن، تازہ سرخیاں اور ویڈیو اپڈیٹس دیکھیں۔',
+        fbOpenBtn: 'فیس بک پیج کھولیں',
+        fbCopyBtn: 'پیج شیئر کریں',
+        fbCopiedMsg: 'اے ای نیوز فیس بک پیج کا لنک کاپی ہو گیا ہے۔',
+        officeHeading: 'گلبرگ آفس',
+        officeAddress: 'آفس نمبر 423، فلور 7، میگا ٹاور (نزد کے ایف سی)، مین گلبرگ، لاہور۔',
+        mapOpenBtn: 'گوگل میپس میں کھولیں',
+        mapDirectionsBtn: 'راستہ دیکھیں',
+        dateFilterLabel: 'تاریخ فلٹر:',
+        clearDateBtn: 'تاریخ ہٹائیں',
+        quickDatesLabel: 'فوری تاریخیں:',
+        allDatesBadge: 'تمام تاریخیں شامل ہیں',
+        activeDateBadgePrefix: 'منتخب تاریخ:',
+        autoSyncOnLabel: 'آج کی تاریخ آٹو سنک: آن',
+        autoSyncOffLabel: 'آج کی تاریخ آٹو سنک: آف',
+        noDateMatch: 'منتخب تاریخ کے لیے کوئی خبر موجود نہیں ہے۔',
+        clickDateHint: 'تاریخ پر کلک کر کے فلٹر کریں'
+      },
+      dual: {
+        editionTagline: 'Lahore • Islamabad • Karachi • لاہور • اسلام آباد • کراچی',
+        brandTitle: 'AE NEWS • اے ای نیوز',
+        brandPaperBadge: 'aenewspaper • اے ای نیوز پیپر',
+        brandSubtitle: 'Factual Reporting • مستند صحافت • Digital Journalism • ڈیجیٹل جرنلزم',
+        navNational: 'National • قومی',
+        navPolitics: 'Politics • سیاست',
+        navEconomy: 'Economy • معیشت',
+        navProvincial: 'Provincial • صوبائی',
+        navSports: 'Sports • کھیل',
+        navArchive: 'Archive • آرکائیو',
+        navLeadership: 'Leadership • قیادت',
+        breakingLabel: 'BREAKING • اہم خبر',
+        deskBriefingsTitle: "Today's Latest Desk • آج کی خبریں",
+        verifiedBadge: 'Nov 20 • 20 نومبر',
+        followChannelsTitle: 'AE News Social Channels • سوشل چینلز',
+        secNational: 'National News • قومی خبریں',
+        secNationalSub: 'Federal policy & offshore exploration • وفاقی پالیسی و قومی امور',
+        secPolitics: 'Politics • سیاست',
+        secPoliticsSub: 'Dialogue, parliament & governance • مفاہمت، پارلیمان و طرزِ حکمرانی',
+        secEconomy: 'Economy & Trade • معیشت و تجارت',
+        secEconomySub: 'Fuel prices, PSX markets & banking • پٹرولیم، اسٹاک مارکیٹ و بینکنگ',
+        secProvincial: 'Provincial Updates • صوبائی خبریں',
+        secProvincialSub: 'Lahore smog & Punjab solar • لاہور اسموگ و پنجاب سولر اسکیم',
+        secSports: 'Sports • کھیل',
+        secSportsSub: 'Rawalpindi Test & athlete fund • راولپنڈی ٹیسٹ و اسپورٹس فنڈ',
+        archiveEyebrow: '6-Month Archive • چھ ماہہ ریکارڈ (Jun–Nov 2026 / جون تا نومبر 2026)',
+        secArchive: 'Searchable 6-Month News Archive • سرچ ایبل 6 ماہہ آرکائیو',
+        secArchiveSub: 'Search verified AE News reports in English and Urdu • جون 2026 سے 20 نومبر 2026 تک رپورٹس تلاش کریں۔',
+        resetBtn: 'Reset • ری سیٹ',
+        leadershipEyebrow: 'aenewspaper • Media & Editorial Leadership • صحافتی و میڈیا قیادت',
+        leadershipTitle: 'Media Leadership • ہماری میڈیا قیادت',
+        leadershipSubtitle: 'Guiding AE News with factual reporting and disciplined digital operations • مستند صحافت اور منظم ڈیجیٹل نیوز روم کی قیادت۔',
+        footerBrandName: 'aenewspaper • اے ای نیوز پیپر',
+        footerTagline: 'Truthful Journalism • سچی صحافت • Digital Newsroom • ڈیجیٹل نیوز روم',
+        footerDesc: 'AE News delivers bilingual coverage in English and Urdu • اے ای نیوز انگریزی اور اردو دونوں زبانوں میں مستند خبریں پیش کرتا ہے۔',
+        footerSectionsHeading: 'Sections • سیکشنز',
+        footerSocialHeading: 'Official Social Channels • سوشل چینلز',
+        footerSocialSub: 'Follow AE News across all platforms • تمام سوشل چینلز پر فالو کریں:',
+        copyrightText: '© 2026 AE News • اے ای نیوز پیپر. All rights reserved • جملہ حقوق محفوظ ہیں۔',
+        leadershipCredit: 'Founder: Ch Kamran Javed (چوہدری کامران جاوید) • CEO: Muhammad Husnain Rajput (محمد حسنین راجپوت)',
+        readFullBtn: 'Read Full Report • مکمل رپورٹ پڑھیں',
+        compactBtnLabel: 'Compact View • مختصر متن',
+        fullTextBtnLabel: 'Full Text • مکمل متن',
+        leadStoryBadge: 'NATIONAL LEAD • قومی شہ سرخی',
+        noResultsTitle: 'No matching reports • کوئی خبر نہیں ملی',
+        noResultsBody: 'Adjust search keywords, month, date, or category • تلاش کے الفاظ، مہینہ یا تاریخ تبدیل کریں۔',
+        fbBannerTitle: 'AE News Official Facebook Page • اے ای نیوز آفیشل فیس بک پیج',
+        fbBannerDesc: 'Browse live AE News Facebook bulletins directly inside our portal • براہِ راست ویب سائٹ پر اے ای نیوز فیس بک پیج دیکھیں۔',
+        fbOpenBtn: 'Visit Facebook Page • فیس بک پیج کھولیں',
+        fbCopyBtn: 'Share Page • پیج شیئر کریں',
+        fbCopiedMsg: 'Facebook link copied • فیس بک لنک کاپی ہو گیا ہے۔',
+        officeHeading: 'Gulberg Office • گلبرگ آفس',
+        officeAddress: 'Office No. 423, Floor 7, Mega Tower (Near KFC), Main Gulberg, Lahore. • آفس نمبر 423، فلور 7، میگا ٹاور (نزد کے ایف سی)، مین گلبرگ، لاہور۔',
+        mapOpenBtn: 'Open in Google Maps • گوگل میپس',
+        mapDirectionsBtn: 'Get Directions • راستہ دیکھیں',
+        dateFilterLabel: 'Date Filter • تاریخ فلٹر:',
+        clearDateBtn: 'Clear Date • تاریخ ہٹائیں',
+        quickDatesLabel: 'Quick Dates • فوری تاریخیں:',
+        allDatesBadge: 'All Dates • تمام تاریخیں',
+        activeDateBadgePrefix: 'Date • تاریخ:',
+        autoSyncOnLabel: 'Auto-Sync Today: ON • آٹو سنک آن',
+        autoSyncOffLabel: 'Auto-Sync Today: OFF • آٹو سنک آف',
+        noDateMatch: 'No reports for this date • اس تاریخ کی کوئی خبر نہیں۔',
+        clickDateHint: 'Click date • تاریخ پر کلک کریں'
+      }
+    };
+
+    const SOCIAL_CHANNELS = [
+      {
+        name: 'Facebook',
+        handle: 'AE News',
+        url: 'https://www.facebook.com/profile.php?id=61596777447736&sk=about',
+        badgeClass: 'bg-blue-600 text-white hover:bg-blue-700',
+        icon: '<svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg>'
+      },
+      {
+        name: 'Instagram',
+        handle: '@aenewspaper',
+        url: 'https://www.instagram.com/',
+        badgeClass: 'bg-pink-600 text-white hover:bg-pink-700',
+        icon: '<svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2zm-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6zm9.65 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>'
+      },
+      {
+        name: 'X (Twitter)',
+        handle: '@aenewspaper',
+        url: 'https://x.com/',
+        badgeClass: 'bg-neutral-800 text-white hover:bg-black border border-stone-600',
+        icon: '<svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>'
+      },
+      {
+        name: 'WhatsApp',
+        handle: 'AE News Alerts',
+        url: 'https://www.whatsapp.com/',
+        badgeClass: 'bg-emerald-600 text-white hover:bg-emerald-700',
+        icon: '<svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zm5.82 14.01c-.24.68-1.41 1.3-1.95 1.38-.5.08-1.14.11-1.84-.11-.43-.14-.98-.32-1.69-.63-2.98-1.29-4.92-4.29-5.07-4.49-.15-.2-1.21-1.61-1.21-3.07 0-1.46.77-2.18 1.04-2.48.27-.3.6-.37.8-.37.2 0 .4 0 .57.01.18.01.43-.07.67.51.24.59.83 2.03.9 2.18.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.38-.45.51-.15.15-.3.31-.13.61.17.3.77 1.27 1.65 2.06 1.14 1.01 2.09 1.33 2.39 1.48.3.15.47.12.65-.07.17-.2.75-.87.95-1.17.2-.3.4-.25.67-.15.27.1 1.74.82 2.04.97.3.15.5.22.57.35.08.12.08.72-.16 1.4z"/></svg>'
+      },
+      {
+        name: 'TikTok',
+        handle: '@aenewspaper',
+        url: 'https://www.tiktok.com/',
+        badgeClass: 'bg-zinc-900 text-white hover:bg-zinc-800 border border-teal-400/50',
+        icon: '<svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M16.6 5.82s.51.5 0 0A4.278 4.278 0 0 1 15.54 3h-3.09v12.4a2.592 2.592 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48z"/></svg>'
+      },
+      {
+        name: 'YouTube',
+        handle: 'AE News',
+        url: 'https://www.youtube.com/',
+        badgeClass: 'bg-red-600 text-white hover:bg-red-700',
+        icon: '<svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>'
+      }
+    ];
+
+    const CATEGORY_META = {
+      national: { en: 'National', ur: 'قومی', color: 'bg-red-50 text-brand-crimson border-red-200' },
+      politics: { en: 'Politics', ur: 'سیاست', color: 'bg-amber-50 text-amber-900 border-amber-200' },
+      economy: { en: 'Economy & Trade', ur: 'معیشت و تجارت', color: 'bg-emerald-50 text-emerald-900 border-emerald-200' },
+      provincial: { en: 'Provincial', ur: 'صوبائی', color: 'bg-blue-50 text-blue-900 border-blue-200' },
+      sports: { en: 'Sports', ur: 'کھیل', color: 'bg-purple-50 text-purple-900 border-purple-200' }
+    };
+
+    const ARCHIVE_MONTHS = [
+      { value: 'all', en: 'All Months (Jun–Nov 2026)', ur: 'تمام مہینے (جون تا نومبر 2026)' },
+      { value: '2026-11', en: 'November 2026', ur: 'نومبر 2026' },
+      { value: '2026-10', en: 'October 2026', ur: 'اکتوبر 2026' },
+      { value: '2026-09', en: 'September 2026', ur: 'ستمبر 2026' },
+      { value: '2026-08', en: 'August 2026', ur: 'اگست 2026' },
+      { value: '2026-07', en: 'July 2026', ur: 'جولائی 2026' },
+      { value: '2026-06', en: 'June 2026', ur: 'جون 2026' }
+    ];
+
+    const LEADERSHIP_PROFILES = {
+      founder: {
+        roleEn: 'Founder & Visionary Media Leader',
+        roleUr: 'بانی اور بصیرت افروز میڈیا رہنما',
+        nameEn: 'Ch Kamran Javed',
+        nameUr: 'چوہدری کامران جاوید',
+        monogram: 'CKJ',
+        themeClass: 'border-brand-crimson/40 bg-white',
+        badgeClass: 'bg-brand-crimson text-white',
+        details: [
+          {
+            labelEn: 'Role & Influence',
+            labelUr: 'کردار اور اثر و رسوخ',
+            textEn: 'Ch Kamran Javed is the founder of AE News (aenewspaper) and a prominent voice in modern digital media in Pakistan. Under his leadership, AE News has grown into a trusted platform that prioritizes accurate reporting and public-interest journalism.',
+            textUr: 'چوہدری کامران جاوید اے ای نیوز (aenewspaper) کے بانی اور پاکستان کے جدید ڈیجیٹل میڈیا میں ایک نمایاں آواز ہیں۔ ان کی قیادت میں اے ای نیوز ایک قابلِ اعتماد پلیٹ فارم بن کر ابھرا ہے جو درست رپورٹنگ اور عوامی مفاد کی صحافت کو اولین ترجیح دیتا ہے۔'
+          },
+          {
+            labelEn: 'Leadership Philosophy',
+            labelUr: 'قیادت کا فلسفہ',
+            textEn: 'He believes journalism is not just about breaking stories—it is about shaping informed, thoughtful public discourse through ethical editorial principles.',
+            textUr: 'ان کا ماننا ہے کہ صحافت محض خبریں بریک کرنے کا نام نہیں بلکہ اخلاقی اداری اصولوں کے ذریعے باخبر اور باشعور عوامی رائے عامہ کی تشکیل ہے۔'
+          },
+          {
+            labelEn: 'Focus & Innovation',
+            labelUr: 'ترجیحات اور جدت',
+            textEn: 'Passionate about empowering emerging journalists, embracing new digital storytelling formats, and building transparent community trust.',
+            textUr: 'نوجوان صحافیوں کو بااختیار بنانے، ڈیجیٹل اسٹوری ٹیلنگ کے جدید ذرائع اپنانے اور عوامی اعتماد کو مضبوط بنانے کے لیے پُرعزم ہیں۔'
+          },
+          {
+            labelEn: 'Public Engagement',
+            labelUr: 'عوامی رابطہ',
+            textEn: 'Actively shares editorial reflections, media strategies, and community initiatives across AE News digital channels.',
+            textUr: 'اے ای نیوز کے ڈیجیٹل چینلز کے ذریعے اداری خیالات، میڈیا حکمتِ عملی اور سماجی اقدامات کو فعال انداز میں عوام تک پہنچاتے ہیں۔'
+          }
+        ]
+      },
+      ceo: {
+        roleEn: 'Chief Executive Officer (CEO)',
+        roleUr: 'چیف ایگزیکٹو آفیسر (سی ای او)',
+        nameEn: 'Muhammad Husnain Rajput',
+        nameUr: 'محمد حسنین راجپوت',
+        monogram: 'MHR',
+        themeClass: 'border-amber-500/50 bg-white',
+        badgeClass: 'bg-brand-ink text-amber-300',
+        details: [
+          {
+            labelEn: 'Role & Strategic Direction',
+            labelUr: 'کردار اور اسٹریٹجک سمت',
+            textEn: 'Muhammad Husnain Rajput serves as the CEO of AE News (aenewspaper), overseeing daily newsroom operations, strategic growth, and digital transformation.',
+            textUr: 'محمد حسنین راجپوت اے ای نیوز (aenewspaper) کے چیف ایگزیکٹو آفیسر کے طور پر روزمرہ نیوز روم آپریشنز، اسٹریٹجک ترقی اور ڈیجیٹل جدت کی نگرانی کرتے ہیں۔'
+          },
+          {
+            labelEn: 'Leadership Style',
+            labelUr: 'اندازِ قیادت',
+            textEn: 'Practical, energetic, and forward-thinking—bridging traditional newsroom values with modern digital distribution.',
+            textUr: 'عملی، متحرک اور مستقبل بین سوچ کے حامل—جو روایتی صحافتی اقدار کو جدید ڈیجیٹل نشریاتی تقاضوں سے جوڑتے ہیں۔'
+          },
+          {
+            labelEn: 'Teamwork & Culture',
+            labelUr: 'ٹیم ورک اور ادارہ جاتی کلچر',
+            textEn: 'Champions a collaborative environment where young reporters, editors, and creators thrive together.',
+            textUr: 'ایک ایسے باہمی تعاون پر مبنی ماحول کو فروغ دیتے ہیں جہاں نوجوان رپورٹرز، ایڈیٹرز اور ڈیجیٹل تخلیق کار مل کر آگے بڑھتے ہیں۔'
+          },
+          {
+            labelEn: 'Vision for AE News',
+            labelUr: 'اے ای نیوز کے لیے وژن',
+            textEn: 'Focused on expanding reach, enhancing digital interactivity, and positioning AE News as a go-to platform for timely, credible updates.',
+            textUr: 'پلیٹ فارم کی رسائی بڑھانے، ڈیجیٹل رابطے کو بہتر بنانے اور اے ای نیوز کو بروقت اور مستند خبروں کا اولین مرکز بنانے پر توجہ مرکوز رکھتے ہیں۔'
+          }
+        ]
+      }
+    };
+
+    const ARTICLES = [
+      // === TODAY'S LATEST STORIES (NOVEMBER 20, 2026) ACROSS ALL CATEGORIES ===
+      {
+        id: 'nat-1',
+        featured: true,
+        category: 'national',
+        month: '2026-11',
+        isoDate: '2026-11-20',
+        dateEn: 'November 20, 2026',
+        dateUr: '20 نومبر 2026',
+        cityEn: 'Karachi / Islamabad',
+        cityUr: 'کراچی / اسلام آباد',
+        reporterEn: 'National Energy & Maritime Desk',
+        reporterUr: 'قومی توانائی و بحری ڈیسک',
+        image: 'https://placehold.co/1200x630/14171f/facc15?text=AE+NEWS+PK+%7C+OFFSHORE+OIL+%26+GAS+EXPLORATION+IN+PAKISTAN',
+        imageCaptionEn: 'Turkish research vessel Oruc Reis docks in Pakistan for offshore oil and gas exploration survey.',
+        imageCaptionUr: 'پاکستان کے سمندری حدود میں تیل و گیس کی تلاش کے لیے ترک سروے جہاز کی آمد۔',
+        titleEn: 'Turkish Research Vessel Oruc Reis Docks in Pakistan for Offshore Oil and Gas Survey',
+        titleUr: 'پاکستان کے سمندری حدود میں تیل و گیس کی تلاش کے لیے ترک سروے جہاز اوروچ رئیس پہنچ گیا',
+        summaryEn: 'In a major boost to Pakistan’s offshore energy exploration drive, Turkish seismic research ship Oruc Reis has berthed at Karachi to initiate deep-sea hydrocarbon surveys.',
+        summaryUr: 'پاکستان میں سمندری توانائی کے ذخائر کی تلاش کے منصوبے میں اہم پیش رفت، ترک تحقیقی و سروے جہاز اوروچ رئیس گہرے سمندر میں تیل و گیس کے سروے کے لیے کراچی پہنچ گیا۔',
+        bodyEn: [
+          'The Turkish seismic research vessel Oruc Reis has docked in Pakistan to commence an extensive offshore oil and gas exploration survey in the Arabian Sea.',
+          'Officials from the Petroleum Division stated that the joint exploration mission marks a key milestone in bilateral energy cooperation and aims to map untapped deep-water hydrocarbon reserves.',
+          'Technical teams from Pakistan and Türkiye will coordinate survey operations over the coming weeks to evaluate commercial drilling prospects.'
+        ],
+        bodyUr: [
+          'بحیرہ عرب میں تیل اور گیس کے نئے ذخائر کی تلاش کے لیے ترکیہ کا جدید تحقیقی و سروے جہاز اوروچ رئیس پاکستان پہنچ گیا ہے۔',
+          'پیٹرولیم ڈویژن کے حکام کے مطابق یہ مشترکہ مشن پاک ترک توانائی تعاون میں ایک اہم سنگِ میل ہے جس کا مقصد گہرے سمندر میں موجود ہائیڈرو کاربن ذخائر کی نقشہ سازی کرنا ہے۔',
+          'آئندہ ہفتوں کے دوران پاکستانی اور ترک تکنیکی ماہرین کی ٹیمیں مشترکہ طور پر سروے آپریشنز کی نگرانی کریں گی تاکہ تجارتی پیمانے پر ڈرلنگ کے امکانات کا جائزہ لیا جا سکے۔'
+        ]
+      },
+      {
+        id: 'nat-2',
+        featured: false,
+        category: 'national',
+        month: '2026-11',
+        isoDate: '2026-11-20',
+        dateEn: 'November 20, 2026',
+        dateUr: '20 نومبر 2026',
+        cityEn: 'Islamabad',
+        cityUr: 'اسلام آباد',
+        reporterEn: 'Telecom & Health Desk',
+        reporterUr: 'ٹیلی کام و ہیلتھ ڈیسک',
+        image: 'https://placehold.co/1200x630/7f1d1d/fde68a?text=AE+NEWS+PK+%7C+SUBMARINE+CABLE+RESTORATION+%26+DRAP+BARCODING',
+        imageCaptionEn: 'PTA accelerates submarine fiber cable restoration while DRAP enforces mandatory medicine serialization.',
+        imageCaptionUr: 'پی ٹی اے کی سب میرین کیبل بحالی پر پیش رفت، ڈریپ نے ادویات کی بارکوڈنگ لازمی قرار دے دی۔',
+        titleEn: 'PTA Expedites Submarine Cable Repair; DRAP Enforces Mandatory Medicine Barcoding',
+        titleUr: 'عالمی سب میرین کیبل کی بحالی تیز، ڈریپ نے ادویات کی بارکوڈنگ اور سیریلائزیشن لازمی قرار دے دی',
+        summaryEn: 'Telecom authorities confirmed phased bandwidth rerouting after international submarine cable faults, while DRAP ordered nationwide barcoding on pharmaceutical packs.',
+        summaryUr: 'عالمی سب میرین کیبل میں خرابی کے بعد انٹرنیٹ سروس کی مرحلہ وار بحالی جاری، دوسری جانب ڈریپ نے جعلی ادویات کی روک تھام کے لیے بارکوڈنگ لازمی قرار دے دی۔',
+        bodyEn: [
+          'The Pakistan Telecommunication Authority (PTA) announced that alternative international bandwidth routes have been activated to stabilize internet speeds across major cities.',
+          'Meanwhile, the Drug Regulatory Authority of Pakistan (DRAP) issued a directive making barcode serialization mandatory for pharmaceutical manufacturers to curb counterfeit medicines.',
+          'Health and IT ministries noted that both measures are vital to safeguarding consumer trust and digital service continuity.'
+        ],
+        bodyUr: [
+          'پاکستان ٹیلی کمیونیکیشن اتھارٹی (پی ٹی اے) نے اعلان کیا ہے کہ عالمی سب میرین کیبل میں خرابی کے بعد ملک بھر میں انٹرنیٹ رفتار بحال کرنے کے لیے متبادل بینڈوڈتھ روٹس فعال کر دیے گئے ہیں۔',
+          'دوسری جانب ڈرگ ریگولیٹری اتھارٹی آف پاکستان (ڈریپ) نے جعلی اور غیر معیاری ادویات کے خاتمے کے لیے تمام فارماسیوٹیکل کمپنیوں پر بارکوڈنگ اور سیریلائزیشن لازمی قرار دے دی ہے۔',
+          'وزارتِ صحت اور آئی ٹی حکام کے مطابق یہ دونوں اقدامات صارفین کے تحفظ اور ڈیجیٹل سروسز کے تسلسل کے لیے نہایت اہم ہیں۔'
+        ]
+      },
+      {
+        id: 'pol-1',
+        featured: false,
+        category: 'politics',
+        month: '2026-11',
+        isoDate: '2026-11-20',
+        dateEn: 'November 20, 2026',
+        dateUr: '20 نومبر 2026',
+        cityEn: 'Islamabad',
+        cityUr: 'اسلام آباد',
+        reporterEn: 'Parliamentary Correspondent',
+        reporterUr: 'پارلیمانی نامہ نگار',
+        image: 'https://placehold.co/1200x630/78350f/fef3c7?text=AE+NEWS+PK+%7C+POLITICAL+DIALOGUE+%26+CONSULTATION',
+        imageCaptionEn: 'Top political leadership emphasizes dialogue and institutional consensus in Islamabad.',
+        imageCaptionUr: 'اسلام آباد میں اعلیٰ سیاسی قیادت کا باہمی مشاورت اور مذاکرات کے ذریعے مسائل کے حل پر اتفاق۔',
+        titleEn: 'Top Leadership Agrees to Resolve Political Differences Through Structured Dialogue',
+        titleUr: 'اعلیٰ سیاسی قیادت کا باہمی اختلافات مذاکرات اور مشاورت سے حل کرنے پر اتفاق',
+        summaryEn: 'Senior coalition leaders held high-level consultations in Islamabad, reaffirming commitment to parliamentary consensus, administrative coordination, and political stability.',
+        summaryUr: 'اسلام آباد میں اعلیٰ حکومتی و اتحادی قیادت کی اہم مشاورتی بیٹھک، پارلیمانی ہم آہنگی، انتظامی تعاون اور سیاسی استحکام برقرار رکھنے کے عزم کا اعادہ۔',
+        bodyEn: [
+          'President Asif Ali Zardari and Prime Minister Shehbaz Sharif agreed during high-level consultations to address political and administrative differences through sustained dialogue.',
+          'Senior leaders emphasized that regular coordination between federal and provincial coalition partners is essential for legislative progress and economic continuity.',
+          'Parliamentary committees have also been tasked with accelerating consensus on pending governance and local government bills.'
+        ],
+        bodyUr: [
+          'صدر آصف علی زرداری اور وزیراعظم شہباز شریف نے اعلیٰ سطحی مشاورت کے دوران سیاسی و انتظامی معاملات اور اختلافات کو مسلسل مذاکرات کے ذریعے حل کرنے پر اتفاق کیا ہے۔',
+          'رہنماؤں نے اس بات پر زور دیا کہ قانون سازی اور معاشی استحکام کے تسلسل کے لیے وفاقی اور صوبائی اتحادی جماعتوں کے درمیان قریبی رابطہ ناگزیر ہے۔',
+          'پارلیمانی کمیٹیوں کو بھی ہدایت کی گئی ہے کہ زیر التوا بلدیاتی اور انتظامی اصلاحات کے مسودوں پر اتفاقِ رائے کا عمل تیز کیا جائے۔'
+        ]
+      },
+      {
+        id: 'pol-2',
+        featured: false,
+        category: 'politics',
+        month: '2026-11',
+        isoDate: '2026-11-19',
+        dateEn: 'November 19, 2026',
+        dateUr: '19 نومبر 2026',
+        cityEn: 'Lahore',
+        cityUr: 'لاہور',
+        reporterEn: 'Punjab Assembly Desk',
+        reporterUr: 'پنجاب اسمبلی ڈیسک',
+        image: 'https://placehold.co/1200x630/451a03/fde68a?text=AE+NEWS+PK+%7C+PUNJAB+ASSEMBLY+%26+LOCAL+GOVERNANCE',
+        imageCaptionEn: 'Punjab Assembly speaker calls for structured political dialogue on administrative reforms.',
+        imageCaptionUr: 'اسپیکر پنجاب اسمبلی ملک محمد احمد خان کا انتظامی اصلاحات پر تمام جماعتوں کی مشاورت پر زور۔',
+        titleEn: 'Punjab Assembly Speaker Calls for All-Party Consultation on Administrative Reforms',
+        titleUr: 'نئے انتظامی یونٹس اور اصلاحات پر تمام سیاسی جماعتوں کو بیٹھ کر بات کرنی چاہیے: اسپیکر پنجاب اسمبلی',
+        summaryEn: 'Speaker Malik Muhammad Ahmad Khan underscored constitutional dialogue across party lines as Punjab prepares for local government elections and district-level reforms.',
+        summaryUr: 'پنجاب میں بلدیاتی انتخابات اور ضلعی اصلاحات کی تیاریوں کے دوران اسپیکر ملک محمد احمد خان نے تمام جماعتوں کے درمیان آئینی مکالمے پر زور دیا۔',
+        bodyEn: [
+          'Punjab Assembly Speaker Malik Muhammad Ahmad Khan stated that open parliamentary dialogue among all political parties is vital before advancing major administrative proposals.',
+          'He noted that empowering local governments and strengthening assembly standing committees will improve civic service delivery across Punjab.',
+          'Opposition and treasury members welcomed greater committee-level scrutiny of public welfare bills.'
+        ],
+        bodyUr: [
+          'اسپیکر پنجاب اسمبلی ملک محمد احمد خان نے کہا ہے کہ اہم انتظامی تجاویز کو آگے بڑھانے سے قبل تمام سیاسی جماعتوں کا پارلیمانی فورم پر بیٹھ کر مشاورت کرنا ضروری ہے۔',
+          'انہوں نے کہا کہ بلدیاتی اداروں کو بااختیار بنانے اور اسمبلی کی قائمہ کمیٹیوں کو فعال کرنے سے پنجاب بھر میں عوامی خدمات کا معیار بہتر ہوگا۔',
+          'حکومتی اور اپوزیشن اراکین نے عوامی فلاح کے بلوں پر کمیٹیوں کی سطح پر تفصیلی غور کو خوش آئند قرار دیا۔'
+        ]
+      },
+      {
+        id: 'eco-1',
+        featured: false,
+        category: 'economy',
+        month: '2026-11',
+        isoDate: '2026-11-20',
+        dateEn: 'November 20, 2026',
+        dateUr: '20 نومبر 2026',
+        cityEn: 'Karachi / Islamabad',
+        cityUr: 'کراچی / اسلام آباد',
+        reporterEn: 'Business & Markets Desk',
+        reporterUr: 'بزنس و مارکیٹس ڈیسک',
+        image: 'https://placehold.co/1200x630/064e3b/a7f3d0?text=AE+NEWS+PK+%7C+FUEL+PRICE+RELIEF+%26+PSX+BULLISH+TREND',
+        imageCaptionEn: 'Petrol price reduction and banking sector dividends lift investor sentiment at PSX.',
+        imageCaptionUr: 'پٹرولیم مصنوعات کی قیمتوں میں کمی اور بینکنگ سیکٹر کے منافع سے اسٹاک مارکیٹ میں تیزی۔',
+        titleEn: 'Petrol Price Cut Brings Public Relief as PSX Opens on Bullish Note',
+        titleUr: 'پٹرولیم مصنوعات کی قیمتوں میں کمی سے عوام کو ریلیف، پاکستان اسٹاک مارکیٹ میں تیزی کا رجحان',
+        summaryEn: 'Lower petroleum prices eased transport cost pressures across major cities while strong banking sector dividends supported positive momentum on the Pakistan Stock Exchange.',
+        summaryUr: 'پٹرول سستا ہونے سے شہریوں اور ٹرانسپورٹ سیکٹر کو ریلیف ملا جبکہ بینکنگ سیکٹر کے مضبوط منافع سے پاکستان اسٹاک ایکسچینج میں تیزی دیکھی گئی۔',
+        bodyEn: [
+          'Following the latest reduction in petroleum product prices, transporters and consumer associations welcomed lower fuel costs expected to stabilize essential commodity rates.',
+          'Meanwhile, trading at the Pakistan Stock Exchange (PSX) opened with strong buying interest in commercial banks, energy, and fertilizer shares after major banks announced interim cash dividends.',
+          'Economic analysts noted that lower fuel inflation and steady remittance inflows are supporting macroeconomic confidence.'
+        ],
+        bodyUr: [
+          'حکومت کی جانب سے پٹرولیم مصنوعات کی قیمتوں میں کمی کے بعد ٹرانسپورٹرز اور صارف تنظیموں نے ایندھن سستا ہونے کا خیرمقدم کیا ہے جس سے اشیائے ضروریہ کی ترسیل کے اخراجات کم ہوں گے۔',
+          'دوسری جانب پاکستان اسٹاک ایکسچینج (پی ایس ایکس) میں کاروبار کے آغاز پر کمرشل بینکوں کی جانب سے عبوری کیش ڈیویڈنڈ کے اعلانات کے بعد بینکنگ، توانائی اور فرٹیلائزر شیئرز میں نمایاں تیزی دیکھی گئی۔',
+          'معاشی ماہرین کے مطابق ایندھن کی قیمتوں میں کمی اور ترسیلاتِ زر کے تسلسل سے مارکیٹ کا اعتماد مضبوط ہو رہا ہے۔'
+        ]
+      },
+      {
+        id: 'eco-2',
+        featured: false,
+        category: 'economy',
+        month: '2026-11',
+        isoDate: '2026-11-18',
+        dateEn: 'November 18, 2026',
+        dateUr: '18 نومبر 2026',
+        cityEn: 'Lahore',
+        cityUr: 'لاہور',
+        reporterEn: 'Banking & Fintech Desk',
+        reporterUr: 'بینکنگ و فن ٹیک ڈیسک',
+        image: 'https://placehold.co/1200x630/065f46/fde68a?text=AE+NEWS+PK+%7C+DIGITAL+PAYMENTS+%26+ISLAMIC+BANKING+GROWTH',
+        imageCaptionEn: 'Industry-academia linkage forum reviews digital payments and Islamic banking expansion.',
+        imageCaptionUr: 'ڈیجیٹل ادائیگیوں اور اسلامی بینکنگ کے فروغ کے لیے بینکنگ و تعلیمی اداروں کا مشترکہ اجلاس۔',
+        titleEn: 'Financial Literacy & Digital Payments Drive Expands Across Commercial Centers',
+        titleUr: 'تجارتی مراکز میں ڈیجیٹل ادائیگیوں، مالی خواندگی اور اسلامی بینکنگ کے فروغ کی مہم تیز',
+        summaryEn: 'Banking leaders and academic researchers met to accelerate QR merchant onboarding, digital literacy, and Islamic SME financing across Punjab.',
+        summaryUr: 'پنجاب بھر میں کیو آر مرچنٹ ادائیگیوں، مالی خواندگی اور چھوٹے کاروباروں کے لیے اسلامی بینکنگ سہولیات بڑھانے پر اتفاق۔',
+        bodyEn: [
+          'Representatives of commercial banks and university business faculties reviewed joint programs to expand digital payment adoption among small and medium enterprises.',
+          'Special workshops in Lahore, Faisalabad, and Multan will help retail merchants transition to instant digital settlements.',
+          'Officials highlighted that broader financial inclusion strengthens tax documentation and lowers cash-handling costs.'
+        ],
+        bodyUr: [
+          'کمرشل بینکوں اور جامعات کے بزنس فیکلٹی نمائندوں نے چھوٹے اور درمیانے درجے کے کاروباروں میں ڈیجیٹل ادائیگیوں کے فروغ کے لیے مشترکہ پروگراموں کا جائزہ لیا۔',
+          'لاہور، فیصل آباد اور ملتان میں خصوصی ورکشاپس کے ذریعے دکانداروں کو فوری ڈیجیٹل ادائیگیوں کے نظام سے منسلک کیا جائے گا۔',
+          'حکام کے مطابق مالی شمولیت میں اضافے سے دستاویزی معیشت مضبوط اور نقد لین دین کے اخراجات کم ہوں گے۔'
+        ]
+      },
+      {
+        id: 'prv-1',
+        featured: false,
+        category: 'provincial',
+        month: '2026-11',
+        isoDate: '2026-11-20',
+        dateEn: 'November 20, 2026',
+        dateUr: '20 نومبر 2026',
+        cityEn: 'Lahore',
+        cityUr: 'لاہور',
+        reporterEn: 'Lahore City & Environment Desk',
+        reporterUr: 'لاہور سٹی و ماحولیات ڈیسک',
+        image: 'https://placehold.co/1200x630/1e3a8a/bfdbfe?text=AE+NEWS+PK+%7C+LAHORE+ANTI-SMOG+DRIVE+%26+ECO+TOURISM+2027',
+        imageCaptionEn: 'Lahore enforces strict anti-smog inspections as the city prepares for ECO Tourism Capital 2027.',
+        imageCaptionUr: 'لاہور میں اسموگ کی روک تھام کے لیے سخت کارروائیاں، شہر کو 2027 کے لیے ای سی او ٹورازم کیپیٹل کا اعزاز۔',
+        titleEn: 'Lahore Intensifies Anti-Smog Crackdown; City Celebrates ECO Tourism Capital 2027 Honour',
+        titleUr: 'لاہور میں اسموگ کے خلاف کریک ڈاؤن تیز، شہر کو 2027 کے لیے ای سی او ٹورازم کیپیٹل کا اعزاز مل گیا',
+        summaryEn: 'District squads stepped up action against smoke-emitting vehicles and industrial units in Lahore while cultural authorities unveiled heritage plans for ECO Tourism Capital 2027.',
+        summaryUr: 'لاہور میں دھواں چھوڑنے والی گاڑیوں اور فیکٹریوں کے خلاف کارروائیوں میں 236 فیصد اضافہ، دوسری جانب ای سی او ٹورازم کیپیٹل 2027 کے لیے ثقافتی منصوبوں کا آغاز۔',
+        bodyEn: [
+          'Lahore district administration and traffic police have intensified anti-smog enforcement, registering a sharp rise in inspections against smoke-emitting vehicles, brick kilns, and non-compliant industrial units.',
+          'Health advisories urged citizens, schoolchildren, and commuters to wear protective masks during peak morning and evening hours.',
+          'Meanwhile, tourism and heritage officials welcomed Lahore’s designation as ECO Tourism Capital for 2027, announcing restoration work across historic walled-city landmarks.'
+        ],
+        bodyUr: [
+          'ضلعی انتظامیہ اور ٹریفک پولیس لاہور نے اسموگ پر قابو پانے کے لیے دھواں چھوڑنے والی گاڑیوں، بھٹوں اور غیر معیاری صنعتی یونٹس کے خلاف کارروائیاں تیز کر دی ہیں۔',
+          'محکمہ صحت نے شہریوں، طلبہ اور مسافروں کو صبح اور شام کے اوقات میں احتیاطی تدابیر اور ماسک کے استعمال کی ہدایت کی ہے۔',
+          'دوسری جانب محکمہ سیاحت و ثقافت نے لاہور کو 2027 کے لیے ای سی او ٹورازم کیپیٹل قرار دیے جانے کا خیرمقدم کرتے ہوئے تاریخی مقامات کی بحالی کے منصوبوں کا اعلان کیا ہے۔'
+        ]
+      },
+      {
+        id: 'prv-2',
+        featured: false,
+        category: 'provincial',
+        month: '2026-11',
+        isoDate: '2026-11-19',
+        dateEn: 'November 19, 2026',
+        dateUr: '19 نومبر 2026',
+        cityEn: 'Lahore / Punjab',
+        cityUr: 'لاہور / پنجاب',
+        reporterEn: 'Punjab Government Desk',
+        reporterUr: 'پنجاب گورنمنٹ ڈیسک',
+        image: 'https://placehold.co/1200x630/1d4ed8/fde68a?text=AE+NEWS+PK+%7C+CM+PUNJAB+SOLAR+SCHEME+PHASE+II+%26+AI+TEACHERS',
+        imageCaptionEn: 'Punjab expands CM Solar Panel Scheme Phase II to 100,000 households and launches AI teacher training.',
+        imageCaptionUr: 'وزیراعلیٰ پنجاب کا سی ایم سولر پینل اسکیم فیز ٹو میں ایک لاکھ گھرانوں کو شامل کرنے اور اساتذہ کی اے آئی تربیت کا فیصلہ۔',
+        titleEn: 'Punjab Expands CM Solar Scheme Phase II to 100,000 Families & Launches AI Training for Teachers',
+        titleUr: 'پنجاب میں سی ایم سولر پینل اسکیم فیز ٹو کا دائرہ ایک لاکھ گھرانوں تک وسیع، 25 ہزار اساتذہ کو اے آئی تربیت دینے کا فیصلہ',
+        summaryEn: 'Chief Minister Maryam Nawaz approved expanding subsidized solar systems to 100,000 eligible households alongside an artificial intelligence training program for 25,898 school teachers.',
+        summaryUr: 'وزیراعلیٰ مریم نواز نے مستحق گھرانوں کے لیے سولر پینل اسکیم فیز ٹو میں توسیع اور سرکاری اسکولوں کے 25 ہزار 898 اساتذہ کو آرٹیفیشل انٹیلی جنس تربیت دینے کی منظوری دے دی۔',
+        bodyEn: [
+          'Punjab Chief Minister Maryam Nawaz approved expanding Phase II of the CM Solar Panel Scheme to benefit 100,000 eligible households across the province to reduce electricity bills.',
+          'In the education sector, the Punjab School Education Department initiated a dedicated program to train 25,898 teachers in Artificial Intelligence tools and modern classroom technology.',
+          'Officials added that district verification portals are live so applicants can track transparent balloting and installation schedules.'
+        ],
+        bodyUr: [
+          'وزیراعلیٰ پنجاب مریم نواز نے بجلی کے بلوں میں ریلیف دینے کے لیے سی ایم سولر پینل اسکیم فیز ٹو میں توسیع کی منظوری دے دی جس کے تحت صوبے کے ایک لاکھ مستحق گھرانوں کو سولر سسٹم فراہم کیے جائیں گے۔',
+          'شعبہ تعلیم میں جدت لانے کے لیے محکمہ اسکول ایجوکیشن پنجاب نے 25 ہزار 898 اساتذہ کو آرٹیفیشل انٹیلی جنس اور جدید تدریسی ٹیکنالوجی کی تربیت دینے کا پروگرام شروع کر دیا ہے۔',
+          'حکام کے مطابق ضلعی سطح پر آن لائن پورٹل فعال کر دیا گیا ہے تاکہ درخواست گزار شفاف قرعہ اندازی اور تنصیب کا شیڈول دیکھ سکیں۔'
+        ]
+      },
+      {
+        id: 'spt-1',
+        featured: false,
+        category: 'sports',
+        month: '2026-11',
+        isoDate: '2026-11-20',
+        dateEn: 'November 20, 2026',
+        dateUr: '20 نومبر 2026',
+        cityEn: 'Rawalpindi / Lahore',
+        cityUr: 'راولپنڈی / لاہور',
+        reporterEn: 'Cricket & Sports Desk',
+        reporterUr: 'کرکٹ و اسپورٹس ڈیسک',
+        image: 'https://placehold.co/1200x630/581c87/f3e8ff?text=AE+NEWS+PK+%7C+RAWALPINDI+TEST+COMMANDING+POSITION',
+        imageCaptionEn: 'National cricket team tightens grip on Rawalpindi Test as fans enjoy free stadium entry.',
+        imageCaptionUr: 'راولپنڈی ٹیسٹ میں قومی کرکٹ ٹیم کی مضبوط گرفت، شائقین کرکٹ کے لیے اسٹیڈیم میں مفت انٹری۔',
+        titleEn: 'National Cricket Team Tightens Grip on Rawalpindi Test Amid Packed Stadium Crowd',
+        titleUr: 'راولپنڈی ٹیسٹ: قومی کرکٹ ٹیم کی میچ پر گرفت مضبوط، شائقین کی بڑی تعداد اسٹیڈیم پہنچ گئی',
+        summaryEn: 'Disciplined bowling and a resilient top-order partnership put Pakistan in command at Rawalpindi Cricket Stadium as PCB’s free-entry initiative drew enthusiastic crowds.',
+        summaryUr: 'نپی تلی باؤلنگ اور ذمہ دارانہ بیٹنگ کی بدولت پاکستان نے راولپنڈی ٹیسٹ میں پوزیشن مستحکم کر لی، پی سی بی کی مفت انٹری اسکیم پر شائقین کا زبردست جوش و خروش۔',
+        bodyEn: [
+          'Pakistan’s national cricket team tightened its hold on the Rawalpindi Test match following a disciplined bowling spell and steady middle-order batting.',
+          'Thousands of cricket fans filled the enclosures at Rawalpindi Cricket Stadium after the Pakistan Cricket Board announced free spectator entry to promote Test cricket.',
+          'Team management praised the young pace and spin combination for maintaining pressure throughout the session.'
+        ],
+        bodyUr: [
+          'راولپنڈی ٹیسٹ میچ میں شاندار باؤلنگ اور ذمہ دارانہ بیٹنگ کے بعد پاکستان کرکٹ ٹیم نے میچ پر اپنی گرفت مزید مضبوط کر لی ہے۔',
+          'پاکستان کرکٹ بورڈ (پی سی بی) کی جانب سے ٹیسٹ کرکٹ کے فروغ کے لیے شائقین کے مفت داخلے کے اعلان کے بعد ہزاروں شائقین اسٹیڈیم میں موجود ہیں۔',
+          'ٹیم مینجمنٹ نے نوجوان فاسٹ باؤلرز اور اسپنرز کی کارکردگی کو سراہتے ہوئے کہا کہ کھلاڑیوں نے پورے سیشن میں حریف ٹیم پر دباؤ برقرار رکھا۔'
+        ]
+      },
+      {
+        id: 'spt-2',
+        featured: false,
+        category: 'sports',
+        month: '2026-11',
+        isoDate: '2026-11-18',
+        dateEn: 'November 18, 2026',
+        dateUr: '18 نومبر 2026',
+        cityEn: 'Islamabad / Lahore',
+        cityUr: 'اسلام آباد / لاہور',
+        reporterEn: 'National Athletics Desk',
+        reporterUr: 'قومی ایتھلیٹکس ڈیسک',
+        image: 'https://placehold.co/1200x630/6b21a8/fde68a?text=AE+NEWS+PK+%7C+RS+1+BILLION+SPORTS+ENDOWMENT+FUND',
+        imageCaptionEn: 'Federal government approves Rs 1 billion Pakistan Sports Endowment Fund for athletes.',
+        imageCaptionUr: 'وفاقی حکومت نے کھلاڑیوں کی فلاح و تربیت کے لیے ایک ارب روپے کے پاکستان اسپورٹس انڈومنٹ فنڈ کی منظوری دے دی۔',
+        titleEn: 'Rs 1 Billion Pakistan Sports Endowment Fund Approved to Support National Athletes',
+        titleUr: 'قومی کھلاڑیوں کی سرپرستی اور جدید تربیت کے لیے 1 ارب روپے کا پاکستان اسپورٹس انڈومنٹ فنڈ منظور',
+        summaryEn: 'The federal government approved a Rs 1 billion endowment fund to provide stipends, international coaching, and injury rehabilitation for athletes across Olympic and national disciplines.',
+        summaryUr: 'وفاقی حکومت نے اولمپک اور قومی کھیلوں کے ایتھلیٹس کو وظائف، بین الاقوامی کوچنگ اور بحالی کی سہولیات فراہم کرنے کے لیے 1 ارب روپے کے فنڈ کی منظوری دے دی۔',
+        bodyEn: [
+          'Prime Minister Shehbaz Sharif approved the Rs 1 billion Pakistan Sports Endowment Fund aimed at supporting high-potential athletes in athletics, hockey, wrestling, and squash.',
+          'Under the framework, medalists and emerging youth athletes will receive monthly training stipends, sports medicine support, and international exposure grants.',
+          'Sports federations across Lahore, Karachi, Peshawar, and Quetta hailed the fund as a transformative step for non-cricket disciplines.'
+        ],
+        bodyUr: [
+          'وزیراعظم شہباز شریف نے ایتھلیٹکس، ہاکی، ریسلنگ اور اسکواش سمیت مختلف کھیلوں کے باصلاحیت کھلاڑیوں کی سرپرستی کے لیے 1 ارب روپے کے پاکستان اسپورٹس انڈومنٹ فنڈ کی منظوری دے دی ہے۔',
+          'اس فریم ورک کے تحت تمغہ جیتنے والے اور ابھرتے ہوئے نوجوان کھلاڑیوں کو ماہانہ تربیتی وظائف، اسپورٹس میڈیسن اور بین الاقوامی مقابلوں میں شرکت کے لیے گرانٹس دی جائیں گی۔',
+          'لاہور، کراچی، پشاور اور کوئٹہ کی اسپورٹس فیڈریشنز نے اس اقدام کو قومی کھیلوں کی بحالی کے لیے سنگِ میل قرار دیا ہے۔'
+        ]
+      },
+
+      // === 6-MONTH ARCHIVE STORIES (JUN–OCT 2026) ===
+      {
+        id: 'arc-oct-1',
+        featured: false,
+        category: 'economy',
+        month: '2026-10',
+        isoDate: '2026-10-18',
+        dateEn: 'October 18, 2026',
+        dateUr: '18 اکتوبر 2026',
+        cityEn: 'Faisalabad',
+        cityUr: 'فیصل آباد',
+        reporterEn: 'Industrial Correspondent',
+        reporterUr: 'صنعتی نامہ نگار',
+        image: 'https://placehold.co/1200x630/064e3b/fde68a?text=AE+NEWS+PK+%7C+TEXTILE+%26+IT+EXPORT+ORDERS+SURGE',
+        imageCaptionEn: 'Textile and IT export corridors record strong autumn order growth.',
+        imageCaptionUr: 'ٹیکسٹائل اور آئی ٹی برآمدی شعبوں میں خزاں کے دوران آرڈرز میں نمایاں اضافہ۔',
+        titleEn: 'Textile & IT Export Orders Show Steady Autumn Uptick in Punjab Hubs',
+        titleUr: 'پنجاب کے صنعتی مراکز میں ٹیکسٹائل اور آئی ٹی برآمدی آرڈرز میں نمایاں اضافہ',
+        summaryEn: 'Export associations in Faisalabad and Lahore reported stronger value-added apparel and software export bookings for the fourth quarter.',
+        summaryUr: 'فیصل آباد اور لاہور کی برآمدی تنظیموں نے چوتھی سہ ماہی کے لیے ویلیو ایڈڈ ملبوسات اور سافٹ ویئر برآمدات میں اضافے کی تصدیق کی۔',
+        bodyEn: [
+          'Exporters in Faisalabad and Lahore confirmed higher international orders in value-added knitwear and IT outsourcing services.',
+          'Industry representatives credited dedicated export facilitation desks and faster customs clearance for improved turnaround times.'
+        ],
+        bodyUr: [
+          'فیصل آباد اور لاہور کے برآمد کنندگان نے ویلیو ایڈڈ نٹ ویئر اور آئی ٹی سروسز میں بین الاقوامی آرڈرز میں اضافے کی تصدیق کی ہے۔',
+          'صنعتی نمائندوں نے تیز رفتار کسٹم کلیئرنس اور برآمدی سہولت ڈیسک کے قیام کو اس بہتری کی اہم وجہ قرار دیا۔'
+        ]
+      },
+      {
+        id: 'arc-sep-1',
+        featured: false,
+        category: 'national',
+        month: '2026-09',
+        isoDate: '2026-09-14',
+        dateEn: 'September 14, 2026',
+        dateUr: '14 ستمبر 2026',
+        cityEn: 'Islamabad',
+        cityUr: 'اسلام آباد',
+        reporterEn: 'Education & Digital Policy Desk',
+        reporterUr: 'تعلیم و ڈیجیٹل پالیسی ڈیسک',
+        image: 'https://placehold.co/1200x630/7f1d1d/facc15?text=AE+NEWS+PK+%7C+NATIONAL+DIGITAL+SKILLS+INITIATIVE',
+        imageCaptionEn: 'Universities partner with tech incubators to expand youth coding and AI bootcamps.',
+        imageCaptionUr: 'نوجوانوں کو جدید ڈیجیٹل مہارتیں سکھانے کے لیے جامعات اور ٹیک انکیوبیٹرز کا اشتراک۔',
+        titleEn: 'National Youth Digital Skills & Freelancing Initiative Launched Across 40 Universities',
+        titleUr: 'ملک کی 40 جامعات میں نوجوانوں کے لیے قومی ڈیجیٹل اسکلز اور فری لانسنگ پروگرام کا آغاز',
+        summaryEn: 'Higher education authorities rolled out accredited cloud computing, cybersecurity, and e-commerce bootcamps for undergraduate students.',
+        summaryUr: 'اعلیٰ تعلیمی کمیشن نے طلبہ کے لیے کلاؤڈ کمپیوٹنگ، سائبر سیکیورٹی اور ای کامرس کے تربیتی کورسز کا آغاز کر دیا۔',
+        bodyEn: [
+          'Over 40 public and private universities joined a nationwide digital skills initiative designed to equip graduates for global remote work.',
+          'Regional incubation centers in Lahore, Islamabad, Karachi, and Peshawar will mentor student startups.'
+        ],
+        bodyUr: [
+          'ملک کی 40 سے زائد سرکاری و نجی جامعات نے نوجوانوں کو عالمی ڈیجیٹل مارکیٹ کے لیے تیار کرنے کے قومی پروگرام میں شمولیت اختیار کر لی ہے۔',
+          'لاہور، اسلام آباد، کراچی اور پشاور کے انکیوبیشن مراکز طلبہ کے اسٹارٹ اپس کی سرپرستی کریں گے۔'
+        ]
+      },
+      {
+        id: 'arc-aug-1',
+        featured: false,
+        category: 'provincial',
+        month: '2026-08',
+        isoDate: '2026-08-22',
+        dateEn: 'August 22, 2026',
+        dateUr: '22 اگست 2026',
+        cityEn: 'Multan / Sukkur',
+        cityUr: 'ملتان / سکھر',
+        reporterEn: 'Agri & Irrigation Desk',
+        reporterUr: 'زراعت و آبپاشی ڈیسک',
+        image: 'https://placehold.co/1200x630/1e3a8a/a7f3d0?text=AE+NEWS+PK+%7C+CANAL+LINING+%26+HIGH-EFFICIENCY+IRRIGATION',
+        imageCaptionEn: 'Provincial irrigation departments expand watercourse lining and drip irrigation subsidies.',
+        imageCaptionUr: 'صوبائی محکمہ آبپاشی کی جانب سے کھالوں کی پختگی اور جدید آبپاشی سبسڈی میں توسیع۔',
+        titleEn: 'Provinces Accelerate Watercourse Lining & High-Efficiency Irrigation Ahead of Rabi Sowing',
+        titleUr: 'ربیع کی بوائی سے قبل صوبوں میں کھالوں کی پختگی اور جدید آبپاشی منصوبوں کی رفتار تیز',
+        summaryEn: 'Provincial agriculture departments expanded solar tube-well and drip irrigation subsidies to conserve canal water and raise crop yields.',
+        summaryUr: 'نہری پانی کے ضیاع کو روکنے اور پیداوار بڑھانے کے لیے صوبائی محکمہ زراعت نے سولر ٹیوب ویل اور ڈرپ ایریگیشن سبسڈی میں اضافہ کر دیا۔',
+        bodyEn: [
+          'Provincial irrigation and agriculture teams accelerated watercourse lining projects across southern Punjab and upper Sindh ahead of the Rabi crop cycle.',
+          'Farmers adopting laser land-leveling and drip systems are receiving up to 60 percent matching grants.'
+        ],
+        bodyUr: [
+          'ربیع کی فصلوں کی بوائی سے قبل جنوبی پنجاب اور بالائی سندھ میں نہری کھالوں کی پختگی کے منصوبوں کی رفتار تیز کر دی گئی ہے۔',
+          'لیزر لینڈ لیولنگ اور ڈرپ ایریگیشن اپنانے والے کاشتکاروں کو 60 فیصد تک سبسڈی فراہم کی جا رہی ہے۔'
+        ]
+      },
+      {
+        id: 'arc-jul-1',
+        featured: false,
+        category: 'politics',
+        month: '2026-07',
+        isoDate: '2026-07-11',
+        dateEn: 'July 11, 2026',
+        dateUr: '11 جولائی 2026',
+        cityEn: 'Islamabad',
+        cityUr: 'اسلام آباد',
+        reporterEn: 'Governance & Law Desk',
+        reporterUr: 'گورننس و قانون ڈیسک',
+        image: 'https://placehold.co/1200x630/78350f/fde68a?text=AE+NEWS+PK+%7C+ELECTORAL+%26+JUDICIAL+DIGITIZATION+REVIEW',
+        imageCaptionEn: 'Parliamentary committee reviews e-filing and digital public service charter.',
+        imageCaptionUr: 'پارلیمانی کمیٹی کا ای فائلنگ اور ڈیجیٹل عوامی خدمات کے چارٹر پر غور۔',
+        titleEn: 'Parliamentary Committee Reviews E-Governance & Citizen Service Charter',
+        titleUr: 'پارلیمانی کمیٹی کا ای گورننس اور شہری سہولت چارٹر پر تفصیلی غور',
+        summaryEn: 'Lawmakers reviewed timelines for digitizing land records, birth registries, and public grievance portals across federal and provincial departments.',
+        summaryUr: 'اراکینِ پارلیمان نے اراضی ریکارڈ، پیدائش کے اندراج اور عوامی شکایات پورٹلز کو مکمل ڈیجیٹل بنانے کے شیڈول کا جائزہ لیا۔',
+        bodyEn: [
+          'A joint parliamentary committee reviewed progress on unified citizen facilitation centers and paperless file tracking across ministries.',
+          'Members stressed strict service-level timelines so citizens can obtain verified certificates online.'
+        ],
+        bodyUr: [
+          'مشترکہ پارلیمانی کمیٹی نے وزارتوں میں پیپرلیس فائل ٹریکنگ اور یکساں شہری سہولت مراکز کی پیش رفت کا جائزہ لیا۔',
+          'اراکین نے اس بات پر زور دیا کہ شہریوں کو آن لائن تصدیق شدہ دستاویزات کی بروقت فراہمی یقینی بنائی جائے۔'
+        ]
+      },
+      {
+        id: 'arc-jun-1',
+        featured: false,
+        category: 'sports',
+        month: '2026-06',
+        isoDate: '2026-06-25',
+        dateEn: 'June 25, 2026',
+        dateUr: '25 جون 2026',
+        cityEn: 'Sialkot / Lahore',
+        cityUr: 'سیالکوٹ / لاہور',
+        reporterEn: 'Sports Industry & Youth Desk',
+        reporterUr: 'اسپورٹس انڈسٹری و یوتھ ڈیسک',
+        image: 'https://placehold.co/1200x630/581c87/fde68a?text=AE+NEWS+PK+%7C+SIALKOT+SPORTS+MANUFACTURING+%26+YOUTH+LEAGUE',
+        imageCaptionEn: 'Sialkot sports goods manufacturers unveil eco-certified match balls and youth academy gear.',
+        imageCaptionUr: 'سیالکوٹ کے اسپورٹس مینوفیکچررز کی جانب سے ماحول دوست فٹ بالز اور یوتھ اکیڈمی کٹس متعارف۔',
+        titleEn: 'Sialkot Sports Manufacturers Expand Eco-Certified Production & Regional Youth Academies',
+        titleUr: 'سیالکوٹ کی اسپورٹس انڈسٹری میں ماحول دوست مصنوعات اور علاقائی یوتھ اکیڈمیز کی توسیع',
+        summaryEn: 'Sialkot exporters upgraded automated stitching lines for international tournaments while sponsoring district-level football and hockey academies.',
+        summaryUr: 'سیالکوٹ کے برآمد کنندگان نے عالمی ٹورنامنٹس کے لیے جدید پیداواری لائنیں نصب کرنے کے ساتھ ضلعی سطح پر فٹ بال اور ہاکی اکیڈمیز قائم کر دیں۔',
+        bodyEn: [
+          'Sports goods manufacturers in Sialkot reported strong global demand for thermo-bonded match footballs and composite hockey sticks.',
+          'Chamber leaders also launched summer coaching camps across Gujranwala division to nurture grassroots athletes.'
+        ],
+        bodyUr: [
+          'سیالکوٹ کے کھیلوں کا سامان بنانے والے اداروں نے عالمی منڈی میں تھرمو بانڈڈ فٹ بالز اور جدید ہاکی اسٹکس کی بڑھتی مانگ پر اطمینان کا اظہار کیا ہے۔',
+          'چیمبر رہنماؤں نے گوجرانوالہ ڈویژن میں نچلی سطح کے کھلاڑیوں کی تربیت کے لیے سمر کوچنگ کیمپس کا بھی آغاز کر دیا ہے۔'
+        ]
+      }
+    ];
+
+    // Helper: Current Pakistan Standard Time (Asia/Karachi) date & clock parts
+    function getLiveKarachiDateParts() {
+      const now = new Date();
+      const isoFormatter = new Intl.DateTimeFormat('en-CA', {
+        timeZone: 'Asia/Karachi',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+      });
+      const enDateFormatter = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'Asia/Karachi',
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+      const urDateFormatter = new Intl.DateTimeFormat('ur-PK', {
+        timeZone: 'Asia/Karachi',
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+      const timeFormatter = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'Asia/Karachi',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true
+      });
+
+      return {
+        isoDate: isoFormatter.format(now),
+        enDate: enDateFormatter.format(now),
+        urDate: urDateFormatter.format(now),
+        timeStr: `${timeFormatter.format(now)} PKT`
+      };
+    }
+
+    function getTodayIsoDate() {
+      return getLiveKarachiDateParts().isoDate;
+    }
+
+    function updateLiveDateTimeClock() {
+      const parts = getLiveKarachiDateParts();
+      const dateEl = document.getElementById('liveDateDisplay');
+      const clockEl = document.getElementById('liveClockText');
+      const picker = document.getElementById('archiveDatePicker');
+
+      if (dateEl) {
+        if (langMode === 'en') {
+          dateEl.textContent = parts.enDate;
+        } else if (langMode === 'ur') {
+          dateEl.textContent = parts.urDate;
+        } else {
+          dateEl.textContent = `${parts.enDate} • ${parts.urDate}`;
+        }
+      }
+
+      if (clockEl) {
+        clockEl.textContent = parts.timeStr;
+      }
+
+      if (picker && parts.isoDate > picker.max) {
+        picker.max = parts.isoDate;
+      }
+
+      if (lastObservedTodayIso && lastObservedTodayIso !== parts.isoDate) {
+        lastObservedTodayIso = parts.isoDate;
+        if (autoSyncToday) {
+          selectedDate = parts.isoDate;
+          updateDateFilterUI();
+          renderCategorySections();
+          renderArchive();
+        }
+      } else if (!lastObservedTodayIso) {
+        lastObservedTodayIso = parts.isoDate;
+      }
+    }
+
+    function toggleAutoDateSync() {
+      autoSyncToday = !autoSyncToday;
+      if (autoSyncToday) {
+        selectedDate = getTodayIsoDate();
+      } else {
+        selectedDate = '';
+      }
+      updateDateFilterUI();
+      renderCategorySections();
+      renderArchive();
+    }
+
+    function getUniqueSortedDates() {
+      const unique = Array.from(new Set(ARTICLES.map((a) => a.isoDate).filter(Boolean)));
+      return unique.sort((a, b) => b.localeCompare(a));
+    }
+
+    function renderQuickDateChips() {
+      const container = document.getElementById('quickDateChips');
+      if (!container) return;
+      const dates = getUniqueSortedDates();
+      const allActive = !selectedDate;
+
+      const allChip = `
+        <button
+          type="button"
+          onclick="clearSelectedDate()"
+          class="px-2.5 py-1 rounded-md text-xs font-bold transition-colors cursor-pointer ${
+            allActive
+              ? 'bg-brand-ink text-white shadow-xs'
+              : 'bg-white text-brand-ink border border-stone-300 hover:bg-stone-100'
+          }">
+          ${langMode === 'ur' ? 'تمام' : langMode === 'dual' ? 'All • تمام' : 'All'}
+        </button>
+      `;
+
+      const dateChips = dates
+        .map((iso) => {
+          const isSelected = selectedDate === iso;
+          const art = ARTICLES.find((a) => a.isoDate === iso);
+          const label =
+            langMode === 'ur' && art
+              ? art.dateUr
+              : langMode === 'dual' && art
+              ? `${iso} (${art.dateUr})`
+              : iso;
+          return `
+            <button
+              type="button"
+              onclick="toggleDateFilter('${iso}')"
+              class="px-2.5 py-1 rounded-md text-xs font-semibold transition-colors cursor-pointer ${
+                isSelected
+                  ? 'bg-brand-crimson text-white shadow-xs'
+                  : 'bg-white text-stone-700 border border-stone-300 hover:border-brand-crimson hover:text-brand-crimson'
+              }">
+              ${label}
+            </button>
+          `;
+        })
+        .join('');
+
+      container.innerHTML = allChip + dateChips;
+    }
+
+    function updateDateFilterUI() {
+      const t = UI_TEXT[langMode] || UI_TEXT.en;
+      const picker = document.getElementById('archiveDatePicker');
+      const indicator = document.getElementById('activeDateIndicator');
+      const autoBtn = document.getElementById('autoSyncDateBtn');
+
+      if (picker) {
+        picker.value = selectedDate || '';
+      }
+      if (autoBtn) {
+        if (autoSyncToday) {
+          autoBtn.textContent = t.autoSyncOnLabel;
+          autoBtn.className = 'px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-extrabold shadow-xs transition-colors cursor-pointer';
+        } else {
+          autoBtn.textContent = t.autoSyncOffLabel;
+          autoBtn.className = 'px-3 py-1.5 rounded-lg bg-stone-200 hover:bg-stone-300 text-brand-ink text-xs font-extrabold transition-colors cursor-pointer';
+        }
+      }
+      if (indicator) {
+        if (selectedDate) {
+          indicator.textContent = `${t.activeDateBadgePrefix} ${selectedDate}`;
+          indicator.className = 'text-xs font-extrabold px-2.5 py-1 rounded-full bg-brand-crimson text-white';
+        } else {
+          indicator.textContent = t.allDatesBadge;
+          indicator.className = 'text-xs font-bold px-2.5 py-1 rounded-full bg-stone-200 text-stone-700';
+        }
+      }
+      renderQuickDateChips();
+    }
+
+    function setSelectedDate(isoDate) {
+      autoSyncToday = false;
+      selectedDate = (isoDate || '').trim();
+      updateDateFilterUI();
+      renderCategorySections();
+      renderArchive();
+    }
+
+    function toggleDateFilter(isoDate) {
+      autoSyncToday = false;
+      if (selectedDate === isoDate) {
+        selectedDate = '';
+      } else {
+        selectedDate = isoDate;
+      }
+      updateDateFilterUI();
+      renderCategorySections();
+      renderArchive();
+    }
+
+    function clearSelectedDate() {
+      autoSyncToday = false;
+      selectedDate = '';
+      updateDateFilterUI();
+      renderCategorySections();
+      renderArchive();
+    }
+
+    function resetArchiveFilters() {
+      const searchInput = document.getElementById('archiveSearchInput');
+      const monthSelect = document.getElementById('archiveMonthSelect');
+      const catSelect = document.getElementById('archiveCategorySelect');
+      if (searchInput) searchInput.value = '';
+      if (monthSelect) monthSelect.value = 'all';
+      if (catSelect) catSelect.value = 'all';
+      autoSyncToday = false;
+      selectedDate = '';
+      updateDateFilterUI();
+      renderCategorySections();
+      renderArchive();
+    }
+
+    function renderBilingualText(enText, urText, enClass = '', urClass = '') {
+      if (langMode === 'en') {
+        return `<span class="latin-text block ${enClass}">${enText}</span>`;
+      }
+      if (langMode === 'ur') {
+        return `<span class="urdu-text block ${urClass}">${urText}</span>`;
+      }
+      return `
+        <span class="latin-text block ${enClass}">${enText}</span>
+        <span class="urdu-text block mt-1 text-stone-700 ${urClass}">${urText}</span>
+      `;
+    }
+
+    function getCategoryLabel(categoryKey) {
+      const meta = CATEGORY_META[categoryKey] || CATEGORY_META.national;
+      if (langMode === 'en') return meta.en;
+      if (langMode === 'ur') return meta.ur;
+      return `${meta.en} • ${meta.ur}`;
+    }
+
+    function getArticleHeadline(article) {
+      if (langMode === 'en') return article.titleEn;
+      if (langMode === 'ur') return article.titleUr;
+      return `${article.titleEn} • ${article.titleUr}`;
+    }
+
+    function getArticleSummary(article) {
+      if (langMode === 'en') return article.summaryEn;
+      if (langMode === 'ur') return article.summaryUr;
+      return `${article.summaryEn} — ${article.summaryUr}`;
+    }
+
+    function renderClickableDateButton(article, customClasses = '') {
+      const t = UI_TEXT[langMode] || UI_TEXT.en;
+      const isSelected = selectedDate === article.isoDate;
+      const label =
+        langMode === 'en'
+          ? article.dateEn
+          : langMode === 'ur'
+          ? article.dateUr
+          : `${article.dateEn} • ${article.dateUr}`;
+      const activeClasses = isSelected
+        ? 'bg-brand-crimson text-white border-brand-crimson'
+        : customClasses || 'bg-stone-100 hover:bg-red-50 text-brand-ink hover:text-brand-crimson border-stone-200';
+      return `
+        <button
+          type="button"
+          onclick="toggleDateFilter('${article.isoDate}')"
+          title="${t.clickDateHint}"
+          class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md border text-[11px] font-bold transition-colors cursor-pointer ${activeClasses}">
+          <span>📅</span>
+          <span>${label}</span>
+        </button>
+      `;
+    }
+
+    function getArticleMetaLine(article) {
+      if (langMode === 'en') {
+        return `${article.cityEn} • ${article.reporterEn}`;
+      }
+      if (langMode === 'ur') {
+        return `${article.cityUr} • ${article.reporterUr}`;
+      }
+      return `${article.cityEn} (${article.cityUr})`;
+    }
+
+    function getArticleReporterLine(article) {
+      if (langMode === 'en') return article.reporterEn;
+      if (langMode === 'ur') return article.reporterUr;
+      return `${article.reporterEn} • ${article.reporterUr}`;
+    }
+
+    function renderArticleImage(article, heightClass = 'h-48 sm:h-52', showCaption = false) {
+      const altText = `${article.titleEn} | ${article.titleUr}`;
+      const fallbackUrl = `https://placehold.co/1200x630/14171f/facc15?text=AE+NEWS+PK+%7C+${encodeURIComponent(article.category.toUpperCase())}`;
+      const captionHtml =
+        showCaption && (article.imageCaptionEn || article.imageCaptionUr)
+          ? `<figcaption class="px-3.5 py-2 bg-stone-50 border-t border-stone-200 text-[11px] text-brand-muted">
+              ${
+                langMode === 'en'
+                  ? `<span class="latin-text block">${article.imageCaptionEn}</span>`
+                  : langMode === 'ur'
+                  ? `<span class="urdu-text block">${article.imageCaptionUr}</span>`
+                  : `<span class="latin-text block">${article.imageCaptionEn}</span><span class="urdu-text block mt-0.5">${article.imageCaptionUr}</span>`
+              }
+            </figcaption>`
+          : '';
+
+      return `
+        <figure class="overflow-hidden rounded-xl border border-stone-200 bg-stone-100">
+          <img
+            src="${article.image || fallbackUrl}"
+            alt="${altText.replace(/"/g, '&quot;')}"
+            loading="lazy"
+            onerror="this.onerror=null;this.src='${fallbackUrl}';"
+            class="w-full ${heightClass} object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+          />
+          ${captionHtml}
+        </figure>
+      `;
+    }
+
+    function renderArticleParagraphs(article, isCompact = false) {
+      const enParas = isCompact ? article.bodyEn.slice(0, 1) : article.bodyEn;
+      const urParas = isCompact ? article.bodyUr.slice(0, 1) : article.bodyUr;
+      const proseClass = isCompact ? 'article-prose-compact text-xs sm:text-sm' : 'article-prose text-xs sm:text-sm';
+
+      if (langMode === 'en') {
+        return `<div class="latin-text ${proseClass} text-stone-700">${enParas.map((p) => `<p>${p}</p>`).join('')}</div>`;
+      }
+      if (langMode === 'ur') {
+        return `<div class="urdu-text ${proseClass} text-stone-700">${urParas.map((p) => `<p>${p}</p>`).join('')}</div>`;
+      }
+      const paired = enParas
+        .map(
+          (enP, idx) => `
+          <div class="p-3 rounded-xl bg-stone-50/90 border border-stone-200/80 space-y-1.5">
+            <p class="latin-text text-xs sm:text-sm text-brand-ink">${enP}</p>
+            ${urParas[idx] ? `<p class="urdu-text text-xs sm:text-sm text-stone-700 border-t border-stone-200/70 pt-1.5">${urParas[idx]}</p>` : ''}
+          </div>
+        `
+        )
+        .join('');
+      return `<div class="space-y-2.5">${paired}</div>`;
+    }
+
+    function toggleArticleLength(articleId) {
+      if (compactArticleIds.has(articleId)) {
+        compactArticleIds.delete(articleId);
+      } else {
+        compactArticleIds.add(articleId);
+      }
+      renderCategorySections();
+      renderArchive();
+    }
+
+    function createArticleCardHTML(article) {
+      const t = UI_TEXT[langMode];
+      const meta = CATEGORY_META[article.category] || CATEGORY_META.national;
+      const isCompact = compactArticleIds.has(article.id);
+      const lengthBtnText = isCompact ? t.fullTextBtnLabel : t.compactBtnLabel;
+      const fallbackUrl = `https://placehold.co/1200x630/14171f/facc15?text=AE+NEWS+PK+%7C+${encodeURIComponent(article.category.toUpperCase())}`;
+
+      const topVisualBlock = `
+        <div class="relative rounded-xl overflow-hidden border border-stone-200 bg-brand-ink text-white shadow-xs">
+          <img
+            src="${article.image || fallbackUrl}"
+            alt="${article.titleEn.replace(/"/g, '&quot;')}"
+            loading="lazy"
+            onerror="this.onerror=null;this.src='${fallbackUrl}';"
+            class="absolute inset-0 w-full h-full object-cover opacity-50 transition-transform duration-300 group-hover:scale-[1.03]"
+          />
+          <div class="relative z-10 bg-gradient-to-t from-brand-ink/95 via-brand-ink/75 to-black/40 p-4 sm:p-5 pt-16 sm:pt-20 space-y-2.5">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-400 text-brand-ink">
+                ${getCategoryLabel(article.category)}
+              </span>
+              <div class="flex flex-wrap items-center gap-2">
+                ${renderClickableDateButton(article, 'bg-black/50 hover:bg-brand-crimson text-amber-200 hover:text-white border-white/25')}
+                <span class="text-xs text-stone-200 font-medium">${getArticleMetaLine(article)}</span>
+              </div>
+            </div>
+
+            <h3 class="text-base sm:text-lg font-extrabold text-white drop-shadow-xs">
+              ${
+                langMode === 'en'
+                  ? `<span class="latin-text block leading-snug">${article.titleEn}</span>`
+                  : langMode === 'ur'
+                  ? `<span class="urdu-text block leading-relaxed">${article.titleUr}</span>`
+                  : `<span class="latin-text block leading-snug">${article.titleEn}</span><span class="urdu-text block mt-1 text-amber-200 text-sm sm:text-base">${article.titleUr}</span>`
+              }
+            </h3>
+          </div>
+        </div>
+      `;
+
+      return `
+        <article class="bg-white rounded-2xl border border-stone-200/90 shadow-xs hover:shadow-md transition-all p-5 sm:p-6 flex flex-col justify-between gap-4 group">
+          <div class="space-y-3.5">
+            ${topVisualBlock}
+
+            <div class="text-xs sm:text-sm font-medium text-stone-600 bg-amber-50/70 border-s-4 border-brand-gold px-3 py-2 rounded-e-lg">
+              ${renderBilingualText(article.summaryEn, article.summaryUr)}
+            </div>
+
+            ${renderArticleParagraphs(article, isCompact)}
+          </div>
+
+          <div class="pt-3 border-t border-stone-100 flex flex-wrap items-center justify-between gap-2">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="text-xs font-semibold text-brand-muted">${getArticleReporterLine(article)}</span>
+              <span class="px-2 py-0.5 rounded bg-stone-100 text-[10px] font-bold text-stone-600">aenewspaper</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <button
+                type="button"
+                onclick="toggleArticleLength('${article.id}')"
+                class="px-3 py-1.5 rounded-lg bg-stone-100 hover:bg-stone-200 text-brand-ink text-xs font-bold transition-colors cursor-pointer">
+                ${lengthBtnText}
+              </button>
+              <button
+                type="button"
+                onclick="openArticleModal('${article.id}')"
+                class="px-3 py-1.5 rounded-lg bg-brand-crimson hover:bg-brand-crimsonDark text-white text-xs font-bold transition-colors cursor-pointer">
+                ${t.readFullBtn}
+              </button>
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    function renderBreakingTicker() {
+      const track = document.getElementById('tickerContent');
+      if (!track) return;
+      const itemsHtml = ARTICLES.map(
+        (art) => `
+        <button
+          type="button"
+          onclick="openArticleModal('${art.id}')"
+          class="inline-flex items-center gap-2.5 hover:text-amber-200 transition-colors cursor-pointer whitespace-nowrap">
+          <span class="px-2 py-0.5 rounded bg-black/25 text-[11px] font-bold uppercase tracking-wider">
+            ${getCategoryLabel(art.category)}
+          </span>
+          <span>${getArticleHeadline(art)}</span>
+        </button>
+      `
+      ).join('<span class="text-amber-300/70">•</span>');
+
+      track.innerHTML = itemsHtml + '<span class="text-amber-300/70">•</span>' + itemsHtml;
+    }
+
+    function renderHeroAndBriefings() {
+      const lead = ARTICLES.find((a) => a.featured) || ARTICLES[0];
+      const t = UI_TEXT[langMode];
+      const heroContainer = document.getElementById('heroLeadContainer');
+      const fallbackUrl = 'https://placehold.co/1200x630/14171f/facc15?text=AE+NEWS+PK+%7C+NATIONAL+LEAD';
+
+      if (heroContainer && lead) {
+        heroContainer.innerHTML = `
+          <div class="relative overflow-hidden bg-brand-ink text-white">
+            <img
+              src="${lead.image || fallbackUrl}"
+              alt="${lead.titleEn.replace(/"/g, '&quot;')}"
+              onerror="this.onerror=null;this.src='${fallbackUrl}';"
+              class="absolute inset-0 w-full h-full object-cover opacity-45"
+            />
+            <div class="relative z-10 bg-gradient-to-t from-brand-ink via-brand-ink/85 to-black/45 p-6 sm:p-8 pt-24 sm:pt-32 space-y-4">
+              <div class="flex flex-wrap items-center gap-2.5">
+                <span class="px-3 py-1 rounded-full bg-brand-crimson text-white text-xs font-extrabold tracking-wide shadow-xs">
+                  ${t.leadStoryBadge}
+                </span>
+                ${renderClickableDateButton(lead, 'bg-black/45 hover:bg-brand-crimson text-amber-200 hover:text-white border-white/25')}
+                <span class="text-xs text-stone-200 font-medium">${getArticleMetaLine(lead)}</span>
+              </div>
+
+              <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black text-white drop-shadow-xs">
+                ${
+                  langMode === 'en'
+                    ? `<span class="latin-text block leading-tight">${lead.titleEn}</span>`
+                    : langMode === 'ur'
+                    ? `<span class="urdu-text block leading-relaxed">${lead.titleUr}</span>`
+                    : `<span class="latin-text block leading-tight">${lead.titleEn}</span><span class="urdu-text block mt-2 text-amber-200 text-xl sm:text-2xl">${lead.titleUr}</span>`
+                }
+              </h1>
+
+              <div class="text-sm sm:text-base text-stone-100 leading-relaxed max-w-3xl">
+                ${
+                  langMode === 'en'
+                    ? `<span class="latin-text block">${lead.summaryEn}</span>`
+                    : langMode === 'ur'
+                    ? `<span class="urdu-text block">${lead.summaryUr}</span>`
+                    : `<span class="latin-text block">${lead.summaryEn}</span><span class="urdu-text block mt-1.5 text-stone-200">${lead.summaryUr}</span>`
+                }
+              </div>
+            </div>
+          </div>
+
+          <div class="p-6 sm:p-8 space-y-4 bg-white">
+            ${renderArticleParagraphs(lead, false)}
+
+            <div class="pt-4 border-t border-stone-200 flex flex-wrap items-center justify-between gap-3">
+              <span class="text-xs font-bold text-brand-muted">${getArticleReporterLine(lead)}</span>
+              <button
+                type="button"
+                onclick="openArticleModal('${lead.id}')"
+                class="px-4 py-2 rounded-xl bg-brand-ink hover:bg-brand-crimson text-white text-xs sm:text-sm font-bold transition-colors cursor-pointer">
+                ${t.readFullBtn}
+              </button>
+            </div>
+          </div>
+        `;
+      }
+
+      // Render today's top briefings in the side panel
+      const briefingsContainer = document.getElementById('sideBriefingsList');
+      if (briefingsContainer) {
+        const briefings = ARTICLES.filter((a) => a.id !== lead.id).slice(0, 6);
+        briefingsContainer.innerHTML = briefings
+          .map(
+            (art) => `
+            <div class="py-3 first:pt-0 last:pb-0 flex items-start gap-3">
+              <img
+                src="${art.image}"
+                alt="${art.titleEn.replace(/"/g, '&quot;')}"
+                loading="lazy"
+                class="w-16 h-16 rounded-lg object-cover border border-stone-200 shrink-0 mt-0.5"
+              />
+              <div class="min-w-0 flex-1 space-y-1">
+                <div class="flex flex-wrap items-center justify-between gap-1 text-[11px]">
+                  <span class="font-extrabold text-brand-crimson">${getCategoryLabel(art.category)}</span>
+                  ${renderClickableDateButton(art)}
+                </div>
+                <button
+                  type="button"
+                  onclick="openArticleModal('${art.id}')"
+                  class="w-full text-start font-bold text-xs sm:text-sm text-brand-ink hover:text-brand-crimson transition-colors cursor-pointer line-clamp-2">
+                  ${getArticleHeadline(art)}
+                </button>
+              </div>
+            </div>
+          `
+          )
+          .join('');
+      }
+    }
+
+    function renderCategorySections() {
+      const categories = ['national', 'politics', 'economy', 'provincial', 'sports'];
+      const t = UI_TEXT[langMode] || UI_TEXT.en;
+
+      categories.forEach((cat) => {
+        const grid = document.getElementById(`grid-${cat}`);
+        if (!grid) return;
+        const catArticles = ARTICLES.filter(
+          (a) => a.category === cat && (!selectedDate || a.isoDate === selectedDate)
+        );
+        if (catArticles.length === 0) {
+          grid.innerHTML = `
+            <div class="col-span-full bg-white rounded-2xl border border-dashed border-stone-300 p-6 text-center space-y-2">
+              <p class="text-sm font-bold text-brand-ink">${t.noDateMatch} (${selectedDate})</p>
+              <button
+                type="button"
+                onclick="clearSelectedDate()"
+                class="px-3.5 py-1.5 rounded-lg bg-brand-crimson text-white text-xs font-bold hover:bg-brand-crimsonDark cursor-pointer">
+                ${t.clearDateBtn}
+              </button>
+            </div>
+          `;
+        } else {
+          grid.innerHTML = catArticles.map((art) => createArticleCardHTML(art)).join('');
+        }
+      });
+    }
+
+    function populateArchiveSelects() {
+      const monthSelect = document.getElementById('archiveMonthSelect');
+      const catSelect = document.getElementById('archiveCategorySelect');
+      const currentMonth = monthSelect ? monthSelect.value || 'all' : 'all';
+      const currentCat = catSelect ? catSelect.value || 'all' : 'all';
+
+      if (monthSelect) {
+        monthSelect.innerHTML = ARCHIVE_MONTHS.map((m) => {
+          const label = langMode === 'en' ? m.en : langMode === 'ur' ? m.ur : `${m.en} • ${m.ur}`;
+          return `<option value="${m.value}">${label}</option>`;
+        }).join('');
+        monthSelect.value = currentMonth;
+      }
+
+      if (catSelect) {
+        const allCatLabel =
+          langMode === 'en'
+            ? 'All Categories'
+            : langMode === 'ur'
+            ? 'تمام زمرہ جات'
+            : 'All Categories • تمام زمرہ جات';
+
+        const options = [`<option value="all">${allCatLabel}</option>`];
+        Object.keys(CATEGORY_META).forEach((key) => {
+          options.push(`<option value="${key}">${getCategoryLabel(key)}</option>`);
+        });
+        catSelect.innerHTML = options.join('');
+        catSelect.value = currentCat;
+      }
+    }
+
+    function renderArchive() {
+      const searchInput = document.getElementById('archiveSearchInput');
+      const monthSelect = document.getElementById('archiveMonthSelect');
+      const catSelect = document.getElementById('archiveCategorySelect');
+      const resultsGrid = document.getElementById('archiveResultsGrid');
+      const countBadge = document.getElementById('archiveCountBadge');
+
+      if (!resultsGrid) return;
+
+      const query = (searchInput ? searchInput.value : '').trim().toLowerCase();
+      const selectedMonth = monthSelect ? monthSelect.value : 'all';
+      const selectedCategory = catSelect ? catSelect.value : 'all';
+
+      const filtered = ARTICLES.filter((art) => {
+        const matchesDate = !selectedDate || art.isoDate === selectedDate;
+        const matchesMonth = selectedMonth === 'all' || art.month === selectedMonth;
+        const matchesCategory = selectedCategory === 'all' || art.category === selectedCategory;
+        if (!matchesDate || !matchesMonth || !matchesCategory) return false;
+        if (!query) return true;
+
+        const searchableBlob = [
+          art.titleEn,
+          art.titleUr,
+          art.summaryEn,
+          art.summaryUr,
+          art.cityEn,
+          art.cityUr,
+          art.dateEn,
+          art.dateUr,
+          art.isoDate,
+          art.bodyEn.join(' '),
+          art.bodyUr.join(' ')
+        ]
+          .join(' ')
+          .toLowerCase();
+
+        return searchableBlob.includes(query);
+      });
+
+      if (countBadge) {
+        if (langMode === 'en') {
+          countBadge.textContent = `Showing ${filtered.length} of ${ARTICLES.length} reports`;
+        } else if (langMode === 'ur') {
+          countBadge.textContent = `کل ${ARTICLES.length} میں سے ${filtered.length} رپورٹس`;
+        } else {
+          countBadge.textContent = `Showing ${filtered.length}/${ARTICLES.length} • ${filtered.length} رپورٹس`;
+        }
+      }
+
+      if (filtered.length === 0) {
+        const t = UI_TEXT[langMode];
+        resultsGrid.innerHTML = `
+          <div class="col-span-full bg-stone-50 rounded-2xl border border-dashed border-stone-300 p-8 text-center space-y-2">
+            <h3 class="text-base sm:text-lg font-extrabold text-brand-ink">${t.noResultsTitle}</h3>
+            <p class="text-xs sm:text-sm text-brand-muted">${t.noResultsBody}</p>
+          </div>
+        `;
+        return;
+      }
+
+      resultsGrid.innerHTML = filtered.map((art) => createArticleCardHTML(art)).join('');
+    }
+
+    function renderLeadershipSection() {
+      const container = document.getElementById('leadershipCardsContainer');
+      if (!container) return;
+
+      const profiles = [LEADERSHIP_PROFILES.founder, LEADERSHIP_PROFILES.ceo];
+      container.innerHTML = profiles
+        .map((p) => {
+          const roleHtml = renderBilingualText(
+            p.roleEn,
+            p.roleUr,
+            'text-xs font-extrabold uppercase tracking-wider text-brand-crimson',
+            'text-xs font-bold text-brand-crimson'
+          );
+
+          const nameHtml =
+            langMode === 'en'
+              ? `<h3 class="latin-text text-xl sm:text-2xl font-black text-brand-ink">${p.nameEn}</h3>`
+              : langMode === 'ur'
+              ? `<h3 class="urdu-text text-xl sm:text-2xl font-black text-brand-ink">${p.nameUr}</h3>`
+              : `<h3 class="text-xl sm:text-2xl font-black text-brand-ink">
+                  <span class="latin-text block">${p.nameEn}</span>
+                  <span class="urdu-text block text-lg sm:text-xl text-brand-crimson mt-0.5">${p.nameUr}</span>
+                </h3>`;
+
+          const detailBlocks = p.details
+            .map((d) => {
+              const labelHtml =
+                langMode === 'en'
+                  ? `<span class="latin-text font-extrabold text-brand-ink">${d.labelEn}:</span>`
+                  : langMode === 'ur'
+                  ? `<span class="urdu-text font-extrabold text-brand-ink">${d.labelUr}:</span>`
+                  : `<span class="font-extrabold text-brand-ink">${d.labelEn} • ${d.labelUr}:</span>`;
+
+              const bodyHtml = renderBilingualText(
+                d.textEn,
+                d.textUr,
+                'text-xs sm:text-sm text-stone-700',
+                'text-xs sm:text-sm text-stone-700'
+              );
+
+              return `
+                <div class="p-3.5 rounded-xl bg-stone-50/90 border border-stone-200/80 space-y-1">
+                  <div class="text-xs sm:text-sm">${labelHtml}</div>
+                  ${bodyHtml}
+                </div>
+              `;
+            })
+            .join('');
+
+          return `
+            <article class="rounded-2xl border-2 ${p.themeClass} p-6 sm:p-8 shadow-sm flex flex-col justify-between space-y-5">
+              <div class="flex items-start gap-4 border-b border-stone-200 pb-5">
+                <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl ${p.badgeClass} flex items-center justify-center font-black text-lg sm:text-xl shrink-0 shadow-xs latin-badge">
+                  ${p.monogram}
+                </div>
+                <div class="space-y-1 flex-1">
+                  ${roleHtml}
+                  ${nameHtml}
+                  <p class="text-xs font-semibold text-brand-muted">AE News (aenewspaper) • اے ای نیوز پیپر</p>
+                </div>
+              </div>
+              <div class="space-y-3">
+                ${detailBlocks}
+              </div>
+            </article>
+          `;
+        })
+        .join('');
+    }
+
+    function renderSocialChannels() {
+      const headerContainer = document.getElementById('headerSocialLinks');
+      const footerContainer = document.getElementById('footerSocialGrid');
+
+      if (headerContainer) {
+        headerContainer.innerHTML = SOCIAL_CHANNELS.map(
+          (ch) => `
+          <a
+            href="${ch.url}"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Follow AE News on ${ch.name}"
+            class="latin-badge inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-transform hover:-translate-y-0.5 shadow-2xs ${ch.badgeClass}">
+            ${ch.icon}
+            <span>${ch.name}</span>
+          </a>
+        `
+        ).join('');
+      }
+
+      if (footerContainer) {
+        footerContainer.innerHTML = SOCIAL_CHANNELS.map(
+          (ch) => `
+          <a
+            href="${ch.url}"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="AE News ${ch.name}"
+            class="latin-badge flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs font-bold transition-transform hover:-translate-y-0.5 ${ch.badgeClass}">
+            ${ch.icon}
+            <span class="truncate">${ch.name}</span>
+          </a>
+        `
+        ).join('');
+      }
+    }
+
+    function renderFooterOfficeAddress() {
+      const box = document.getElementById('footerOfficeAddressBox');
+      if (!box) return;
+      const t = UI_TEXT[langMode] || UI_TEXT.en;
+      const mapsSearchUrl = 'https://www.google.com/maps/search/?api=1&query=Mega+Tower+Main+Gulberg+Lahore';
+      const mapsDirectionsUrl = 'https://www.google.com/maps/dir/?api=1&destination=Mega+Tower+Main+Gulberg+Lahore';
+      const embedMapUrl = 'https://maps.google.com/maps?q=Mega%20Tower%20Main%20Gulberg%20Lahore&t=&z=15&ie=UTF8&iwloc=&output=embed';
+
+      box.innerHTML = `
+        <h5 class="text-xs font-extrabold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
+          <span>📍</span>
+          <span>${t.officeHeading}</span>
+        </h5>
+        <p class="text-xs text-stone-300 leading-relaxed">
+          ${t.officeAddress}
+        </p>
+        <div class="mt-2.5 rounded-xl overflow-hidden border border-stone-700 bg-stone-900 shadow-xs">
+          <iframe
+            title="AE News Gulberg Office Map - Mega Tower, Main Gulberg, Lahore"
+            src="${embedMapUrl}"
+            class="w-full h-36 border-0"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+        <div class="flex flex-wrap items-center gap-2 pt-1.5">
+          <a
+            href="${mapsSearchUrl}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-stone-800 hover:bg-stone-700 border border-stone-600 text-[11px] font-semibold text-amber-300 transition-colors">
+            <span>🗺️</span>
+            <span>${t.mapOpenBtn}</span>
+          </a>
+          <a
+            href="${mapsDirectionsUrl}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-brand-crimson hover:bg-brand-crimsonDark text-[11px] font-semibold text-white transition-colors">
+            <span>🧭</span>
+            <span>${t.mapDirectionsBtn}</span>
+          </a>
+        </div>
+      `;
+    }
+
+    function openArticleModal(articleId) {
+      const article = ARTICLES.find((a) => a.id === articleId);
+      if (!article) return;
+
+      const modal = document.getElementById('articleModal');
+      const badge = document.getElementById('modalCategoryBadge');
+      const content = document.getElementById('modalContentArea');
+
+      if (badge) badge.textContent = getCategoryLabel(article.category);
+      if (content) {
+        content.innerHTML = `
+          <div class="space-y-4">
+            ${renderArticleImage(article, 'h-56 sm:h-72', true)}
+            <div class="flex flex-wrap items-center gap-2 text-xs text-brand-muted font-semibold">
+              ${renderClickableDateButton(article)}
+              <span>${getArticleMetaLine(article)}</span>
+            </div>
+            <h2 id="modalHeadline" class="text-xl sm:text-2xl font-black text-brand-ink">
+              ${renderBilingualText(article.titleEn, article.titleUr, 'leading-snug', 'text-xl sm:text-2xl font-bold')}
+            </h2>
+            <div class="p-4 rounded-xl bg-amber-50 border-s-4 border-brand-gold text-xs sm:text-sm font-medium text-brand-ink">
+              ${renderBilingualText(article.summaryEn, article.summaryUr)}
+            </div>
+            ${renderArticleParagraphs(article, false)}
+            <div class="pt-4 border-t border-stone-200 text-xs font-bold text-brand-muted">
+              ${getArticleReporterLine(article)}
+            </div>
+          </div>
+        `;
+      }
+
+      if (modal) modal.classList.remove('hidden');
+    }
+
+    function closeArticleModal() {
+      const modal = document.getElementById('articleModal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function openLiveGuideModal() {
+      const modal = document.getElementById('liveGuideModal');
+      if (modal) modal.classList.remove('hidden');
+    }
+
+    function closeLiveGuideModal() {
+      const modal = document.getElementById('liveGuideModal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function copyFacebookPageUrl() {
+      const fbUrl = 'https://www.facebook.com/profile.php?id=61596777447736&sk=about';
+      const statusBox = document.getElementById('fbCopyStatus');
+      const t = UI_TEXT[langMode] || UI_TEXT.en;
+
+      const tempInput = document.createElement('input');
+      tempInput.value = fbUrl;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+
+      if (statusBox) {
+        statusBox.textContent = t.fbCopiedMsg;
+        statusBox.classList.remove('hidden');
+        setTimeout(() => {
+          statusBox.classList.add('hidden');
+        }, 3500);
+      }
+    }
+
+    // Generate a 1640x624 Facebook Page cover banner PNG for AE News
+    function downloadFacebookCoverPng() {
+      try {
+        const canvas = document.createElement('canvas');
+        canvas.width = 1640;
+        canvas.height = 624;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+
+        const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+        grad.addColorStop(0, '#14171f');
+        grad.addColorStop(0.55, '#1f2433');
+        grad.addColorStop(1, '#7f1d1d');
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = '#c59b27';
+        ctx.fillRect(0, 0, canvas.width, 10);
+        ctx.fillStyle = '#b91c1c';
+        ctx.fillRect(0, canvas.height - 14, canvas.width, 14);
+
+        // Emblem circle
+        ctx.beginPath();
+        ctx.arc(175, 312, 92, 0, Math.PI * 2);
+        ctx.fillStyle = '#14171f';
+        ctx.fill();
+        ctx.lineWidth = 6;
+        ctx.strokeStyle = '#facc15';
+        ctx.stroke();
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '900 72px Inter, system-ui, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('AE', 175, 316);
+
+        // Main title & tagline
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#facc15';
+        ctx.font = '800 22px Inter, system-ui, sans-serif';
+        ctx.fillText('OFFICIAL DIGITAL NEWSROOM • aenewspaper', 305, 205);
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '900 74px Inter, system-ui, sans-serif';
+        ctx.fillText('AE NEWS • اے ای نیوز', 305, 292);
+
+        ctx.fillStyle = '#e7e5e4';
+        ctx.font = '600 28px Inter, system-ui, sans-serif';
+        ctx.fillText('National • Politics • Economy • Provincial • Sports', 305, 365);
+
+        ctx.fillStyle = '#fde68a';
+        ctx.font = '600 22px Inter, system-ui, sans-serif';
+        ctx.fillText('Mega Tower, Main Gulberg, Lahore • مستند و بروقت صحافت', 305, 422);
+
+        const link = document.createElement('a');
+        link.download = 'ae-news-facebook-cover.png';
+        link.href = canvas.toDataURL('image/png');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        const statusBox = document.getElementById('fbCopyStatus');
+        if (statusBox) {
+          statusBox.textContent = 'Facebook Cover PNG (1640x624) downloaded • فیس بک کور تصویر ڈاؤن لوڈ ہو گئی ہے۔';
+          statusBox.classList.remove('hidden');
+          setTimeout(() => statusBox.classList.add('hidden'), 3500);
+        }
+      } catch (err) {
+        console.error('Cover export error:', err);
+      }
+    }
+
+    function setLanguageMode(mode) {
+      langMode = mode;
+      const htmlEl = document.documentElement;
+      htmlEl.setAttribute('lang', mode === 'ur' ? 'ur' : 'en');
+      htmlEl.setAttribute('dir', mode === 'ur' ? 'rtl' : 'ltr');
+
+      const btnEn = document.getElementById('btnLangEn');
+      const btnUr = document.getElementById('btnLangUr');
+      const btnDual = document.getElementById('btnLangDual');
+
+      const activeBtnClass = 'px-3 py-1 rounded-md text-xs font-bold transition-all bg-brand-crimson text-white shadow-sm cursor-pointer';
+      const inactiveBtnClass = 'px-3 py-1 rounded-md text-xs font-bold transition-all text-stone-300 hover:text-white cursor-pointer';
+
+      if (btnEn) btnEn.className = `latin-badge ${mode === 'en' ? activeBtnClass : inactiveBtnClass}`;
+      if (btnUr) btnUr.className = mode === 'ur' ? activeBtnClass : inactiveBtnClass;
+      if (btnDual) btnDual.className = mode === 'dual' ? activeBtnClass : inactiveBtnClass;
+
+      const t = UI_TEXT[mode];
+      const textBindings = {
+        editionTagline: t.editionTagline,
+        brandTitle: t.brandTitle,
+        brandPaperBadge: t.brandPaperBadge,
+        brandSubtitle: t.brandSubtitle,
+        fbBannerTitle: t.fbBannerTitle,
+        fbBannerDesc: t.fbBannerDesc,
+        fbBannerOpenBtn: t.fbOpenBtn,
+        fbCopyUrlBtn: t.fbCopyBtn
+      };
+
+      Object.entries(textBindings).forEach(([id, val]) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = val;
+      });
+
+      updateLiveDateTimeClock();
+
+      document.querySelectorAll('[data-i18n]').forEach((el) => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key]) {
+          el.textContent = t[key];
+        }
+      });
+
+      populateArchiveSelects();
+      updateDateFilterUI();
+      renderBreakingTicker();
+      renderHeroAndBriefings();
+      renderCategorySections();
+      renderArchive();
+      renderLeadershipSection();
+      renderSocialChannels();
+      renderFooterOfficeAddress();
+    }
+
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      if (menu) menu.classList.toggle('hidden');
+    }
+
+    function closeMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      if (menu) menu.classList.add('hidden');
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeArticleModal();
+        closeLiveGuideModal();
+      }
+    });
+
+    document.getElementById('articleModal').addEventListener('click', (e) => {
+      if (e.target.id === 'articleModal') closeArticleModal();
+    });
+
+    document.getElementById('liveGuideModal').addEventListener('click', (e) => {
+      if (e.target.id === 'liveGuideModal') closeLiveGuideModal();
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      setLanguageMode('en');
+      updateLiveDateTimeClock();
+      setInterval(updateLiveDateTimeClock, 1000);
+    });
+  </script>
+</body>
+</html>
